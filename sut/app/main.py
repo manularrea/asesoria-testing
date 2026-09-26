@@ -20,7 +20,7 @@ from starlette.middleware.sessions import SessionMiddleware
 
 from . import __version__
 from .auth import authenticate
-from .guardrails import BLOCKED_ANSWER, detect_pii, mask, validate_length
+from .guardrails import evaluate
 from .nlu import DEFAULT_THRESHOLD, IntentClassifier
 
 BASE_DIR = Path(__file__).parent
@@ -104,25 +104,24 @@ class ChatRequest(BaseModel):
 @app.get("/api/health")
 def health():
     return {"status": "ok", "version": __version__, "intents": len(classifier.intents),
-            "threshold": classifier.threshold}
+            "threshold": classifier.threshold, "guardrail": "service" if os.getenv("GUARDRAIL_URL") else "local"}
 
 
 @app.post("/api/chat")
 def chat(request: Request, payload: ChatRequest):
     if not current_user(request):
         return JSONResponse({"detail": "No autenticado."}, status_code=401)
-    error = validate_length(payload.message)
-    if error:
-        return JSONResponse({"detail": error}, status_code=422)
-
     started = time.perf_counter()
-    findings = detect_pii(payload.message)
-    if findings:
-        stored_message = mask(payload.message, findings)
-        result = {"intent": "bloqueado_pii", "answer": BLOCKED_ANSWER, "confidence": None, "status": "blocked"}
+    decision = evaluate(payload.message)
+    if decision.status == "invalid":
+        return JSONResponse({"detail": decision.reason}, status_code=422)
+    if decision.status == "blocked":
+        stored_message = decision.masked_message
+        result = {"intent": "bloqueado_pii", "answer": decision.reason, "confidence": None, "status": "blocked",
+                  "guardrail": decision.source}
     else:
         stored_message = payload.message
-        result = classifier.predict(payload.message).as_dict()
+        result = {**classifier.predict(payload.message).as_dict(), "guardrail": decision.source}
     latency_ms = round((time.perf_counter() - started) * 1000, 1)
 
     record = {

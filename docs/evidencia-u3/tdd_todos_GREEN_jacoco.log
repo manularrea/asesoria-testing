@@ -1,0 +1,64 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  ├─ GuardrailServer (HTTP) ✔
+│  │  ├─ GET /health responde 200 con el estado del servicio ✔
+│  │  ├─ un cuerpo sin campo message devuelve 400 ✔
+│  │  ├─ un mensaje con PAN devuelve 200 con status blocked y texto enmascarado ✔
+│  │  ├─ un mensaje limpio devuelve status allowed ✔
+│  │  └─ un método distinto de POST en /guardrail/evaluate devuelve 405 ✔
+│  ├─ SensitiveDataDetector ✔
+│  │  ├─ un número largo que no cumple Luhn no es tarjeta (evita falsos positivos) ✔
+│  │  ├─ detecta un IBAN de Costa Rica y lo enmascara ✔
+│  │  ├─ detecta un PAN con guiones ✔
+│  │  ├─ texto sin datos sensibles no produce hallazgos ni cambios ✔
+│  │  ├─ detecta un PAN con espacios y lo enmascara dejando los últimos 4 dígitos ✔
+│  │  └─ detecta varios hallazgos en un mismo mensaje ✔
+│  ├─ Luhn ✔
+│  │  ├─ rechazaNumerosInvalidos(String) ✔
+│  │  │  ├─ rechaza 4111111111111112 ✔
+│  │  │  ├─ rechaza 1234567890123 ✔
+│  │  │  └─ rechaza 0000000000000001 ✔
+│  │  ├─ aceptaNumerosValidos(String) ✔
+│  │  │  ├─ acepta PAN válido 4111111111111111 ✔
+│  │  │  ├─ acepta PAN válido 5500000000000004 ✔
+│  │  │  ├─ acepta PAN válido 340000000000009 ✔
+│  │  │  └─ acepta PAN válido 6011000000000004 ✔
+│  │  └─ rechaza entradas vacías o con caracteres no numéricos ✔
+│  ├─ Json ✔
+│  │  ├─ devuelve null si el campo no existe o el JSON no es un objeto ✔
+│  │  ├─ decodifica escapes unicode, tabulador y retorno de carro ✔
+│  │  ├─ escapa saltos de línea, tabuladores y retornos al serializar ✔
+│  │  ├─ extrae el campo message de un objeto JSON, con escapes ✔
+│  │  └─ serializa una decisión con hallazgos y escapa caracteres especiales ✔
+│  └─ GuardrailPolicy ✔
+│     ├─ un mensaje limpio se permite sin cambios ✔
+│     ├─ un mensaje nulo se trata como inválido, no como error ✔
+│     ├─ análisis de valores límite: 500 caracteres se permite, 501 es inválido ✔
+│     ├─ un mensaje con PAN válido se bloquea y se devuelve enmascarado ✔
+│     └─ mensajeVacioEsInvalido(String) ✔
+│        ├─ mensaje vacío '' es inválido ✔
+│        └─ mensaje vacío '   ' es inválido ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 737 ms
+[        11 containers found      ]
+[         0 containers skipped    ]
+[        11 containers started    ]
+[         0 containers aborted    ]
+[        11 containers successful ]
+[         0 containers failed     ]
+[        30 tests found           ]
+[         0 tests skipped         ]
+[        30 tests started         ]
+[         0 tests aborted         ]
+[        30 tests successful      ]
+[         0 tests failed          ]
+
+--- JaCoCo report + check (line >= 85 %, branch >= 75 %) ---
+
+BUILD SUCCESSFUL
+Total time: 0 seconds

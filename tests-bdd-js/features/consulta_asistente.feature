@@ -1,0 +1,1 @@
+../../tests-e2e/src/test/resources/features/consulta_asistente.feature

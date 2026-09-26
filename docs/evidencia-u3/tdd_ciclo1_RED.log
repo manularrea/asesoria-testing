@@ -1,0 +1,75 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  └─ Luhn ✔
+│     ├─ rechazaNumerosInvalidos(String) ✔
+│     │  ├─ rechaza 4111111111111112 ✘ pendiente (TDD: fase roja)
+│     │  ├─ rechaza 1234567890123 ✘ pendiente (TDD: fase roja)
+│     │  └─ rechaza 0000000000000001 ✘ pendiente (TDD: fase roja)
+│     ├─ aceptaNumerosValidos(String) ✔
+│     │  ├─ acepta PAN válido 4111111111111111 ✘ pendiente (TDD: fase roja)
+│     │  ├─ acepta PAN válido 5500000000000004 ✘ pendiente (TDD: fase roja)
+│     │  ├─ acepta PAN válido 340000000000009 ✘ pendiente (TDD: fase roja)
+│     │  └─ acepta PAN válido 6011000000000004 ✘ pendiente (TDD: fase roja)
+│     └─ rechaza entradas vacías o con caracteres no numéricos ✘ pendiente (TDD: fase roja)
+└─ JUnit Vintage ✔
+
+Failures (8):
+  JUnit Jupiter:Luhn:rechazaNumerosInvalidos(String):rechaza 4111111111111112
+    MethodSource [className = 'edu.testing.asesoria.guardrail.LuhnTest', methodName = 'rechazaNumerosInvalidos', methodParameterTypes = 'java.lang.String']
+    => java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+       edu.testing.asesoria.guardrail.Luhn.isValid(Luhn.java:9)
+       edu.testing.asesoria.guardrail.LuhnTest.rechazaNumerosInvalidos(LuhnTest.java:24)
+  JUnit Jupiter:Luhn:rechazaNumerosInvalidos(String):rechaza 1234567890123
+    MethodSource [className = 'edu.testing.asesoria.guardrail.LuhnTest', methodName = 'rechazaNumerosInvalidos', methodParameterTypes = 'java.lang.String']
+    => java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+       edu.testing.asesoria.guardrail.Luhn.isValid(Luhn.java:9)
+       edu.testing.asesoria.guardrail.LuhnTest.rechazaNumerosInvalidos(LuhnTest.java:24)
+  JUnit Jupiter:Luhn:rechazaNumerosInvalidos(String):rechaza 0000000000000001
+    MethodSource [className = 'edu.testing.asesoria.guardrail.LuhnTest', methodName = 'rechazaNumerosInvalidos', methodParameterTypes = 'java.lang.String']
+    => java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+       edu.testing.asesoria.guardrail.Luhn.isValid(Luhn.java:9)
+       edu.testing.asesoria.guardrail.LuhnTest.rechazaNumerosInvalidos(LuhnTest.java:24)
+  JUnit Jupiter:Luhn:aceptaNumerosValidos(String):acepta PAN válido 4111111111111111
+    MethodSource [className = 'edu.testing.asesoria.guardrail.LuhnTest', methodName = 'aceptaNumerosValidos', methodParameterTypes = 'java.lang.String']
+    => java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+       edu.testing.asesoria.guardrail.Luhn.isValid(Luhn.java:9)
+       edu.testing.asesoria.guardrail.LuhnTest.aceptaNumerosValidos(LuhnTest.java:18)
+  JUnit Jupiter:Luhn:aceptaNumerosValidos(String):acepta PAN válido 5500000000000004
+    MethodSource [className = 'edu.testing.asesoria.guardrail.LuhnTest', methodName = 'aceptaNumerosValidos', methodParameterTypes = 'java.lang.String']
+    => java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+       edu.testing.asesoria.guardrail.Luhn.isValid(Luhn.java:9)
+       edu.testing.asesoria.guardrail.LuhnTest.aceptaNumerosValidos(LuhnTest.java:18)
+  JUnit Jupiter:Luhn:aceptaNumerosValidos(String):acepta PAN válido 340000000000009
+    MethodSource [className = 'edu.testing.asesoria.guardrail.LuhnTest', methodName = 'aceptaNumerosValidos', methodParameterTypes = 'java.lang.String']
+    => java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+       edu.testing.asesoria.guardrail.Luhn.isValid(Luhn.java:9)
+       edu.testing.asesoria.guardrail.LuhnTest.aceptaNumerosValidos(LuhnTest.java:18)
+  JUnit Jupiter:Luhn:aceptaNumerosValidos(String):acepta PAN válido 6011000000000004
+    MethodSource [className = 'edu.testing.asesoria.guardrail.LuhnTest', methodName = 'aceptaNumerosValidos', methodParameterTypes = 'java.lang.String']
+    => java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+       edu.testing.asesoria.guardrail.Luhn.isValid(Luhn.java:9)
+       edu.testing.asesoria.guardrail.LuhnTest.aceptaNumerosValidos(LuhnTest.java:18)
+  JUnit Jupiter:Luhn:rechaza entradas vacías o con caracteres no numéricos
+    MethodSource [className = 'edu.testing.asesoria.guardrail.LuhnTest', methodName = 'rechazaEntradasNoNumericas', methodParameterTypes = '']
+    => java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+       edu.testing.asesoria.guardrail.Luhn.isValid(Luhn.java:9)
+       edu.testing.asesoria.guardrail.LuhnTest.rechazaEntradasNoNumericas(LuhnTest.java:30)
+
+Test run finished after 240 ms
+[         6 containers found      ]
+[         0 containers skipped    ]
+[         6 containers started    ]
+[         0 containers aborted    ]
+[         6 containers successful ]
+[         0 containers failed     ]
+[         8 tests found           ]
+[         0 tests skipped         ]
+[         8 tests started         ]
+[         0 tests aborted         ]
+[         0 tests successful      ]
+[         8 tests failed          ]
+

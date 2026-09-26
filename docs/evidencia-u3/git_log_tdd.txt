@@ -1,0 +1,10 @@
+6c511da test(guardrail): REFACTOR - casos de borde de Json guiados por el reporte JaCoCo (93,5 % líneas, 88,4 % ramas)
+fcd76ed feat(guardrail): GREEN - JSON mínimo y servidor HTTP (JDK HttpServer) · 28 pruebas · JaCoCo 87 % líneas
+21f9e3b test(guardrail): RED - JsonTest y GuardrailServerTest definen el contrato HTTP/JSON
+ba4d51c feat(guardrail): GREEN - política de evaluación (ALLOWED / BLOCKED / INVALID)
+83daf3f test(guardrail): RED - GuardrailPolicyTest (permitir, bloquear, inválido, valores límite)
+f6bcf7b feat(guardrail): GREEN - detector de PAN/IBAN con enmascaramiento
+d6ede6c test(guardrail): RED - SensitiveDataDetectorTest (PAN con Luhn, IBAN, enmascarado, falsos positivos)
+e382d1b feat(guardrail): GREEN - implementación mínima del algoritmo de Luhn
+6f6b9a6 test(guardrail): RED - LuhnTest define el contrato de validación de PAN (8 pruebas fallan)
+e12787e Unidades 1 y 2: SUT AsesorIA, harness JUnit 5 + Playwright y escenarios BDD (Cucumber)

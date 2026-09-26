@@ -8,3 +8,11 @@ tests-e2e/target/
 # Logs y temporales
 sut.log
 .DS_Store
+# Unidad 3
+guardrail-service/target/
+sut/htmlcov/
+sut/coverage.xml
+sut/pytest-report.xml
+sut/.coverage
+tests-bdd-js/node_modules/
+tests-bdd-js/reporte-cucumber.*

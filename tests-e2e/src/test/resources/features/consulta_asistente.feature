@@ -44,3 +44,15 @@ Característica: Consulta asistida por IA con protección de datos sensibles
     Entonces el asistente rechaza la consulta por contener datos sensibles
     Y el estado de la respuesta es "blocked"
     Y el historial muestra la consulta con el número enmascarado como "**** **** **** 1111"
+
+  @CA-03 @guardrail-service
+  Esquema del escenario: Cualquier dato sensible soportado se bloquea antes de la inferencia
+    Cuando el asesor consulta "<consulta>"
+    Entonces el asistente rechaza la consulta por contener datos sensibles
+    Y el estado de la respuesta es "blocked"
+    Y el historial muestra la consulta con el número enmascarado como "<mascara>"
+
+    Ejemplos:
+      | consulta                                             | mascara             |
+      | transferir a la cuenta CR05 0152 0200 1026 2840 66   | CR** **** **** 4066 |
+      | la tarjeta 5500-0000-0000-0004 fue robada            | **** **** **** 0004 |
