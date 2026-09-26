@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="JUnit Jupiter" tests="20" skipped="0" failures="0" errors="0" time="0.122" hostname="vm" timestamp="2026-09-26T18:26:15">
+<testsuite name="JUnit Jupiter" tests="28" skipped="0" failures="0" errors="8" time="0.4" hostname="vm" timestamp="2026-09-26T18:26:51">
 <properties>
 <property name="file.encoding" value="UTF-8"/>
 <property name="file.separator" value="/"/>
@@ -58,6 +58,153 @@
 <property name="user.name" value="root"/>
 <property name="user.timezone" value="America/Bogota"/>
 </properties>
+<testcase name="cuerpoInvalido()" classname="edu.testing.asesoria.guardrail.GuardrailServerTest" time="0">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.GuardrailServer.start(GuardrailServer.java:9)
+	at edu.testing.asesoria.guardrail.GuardrailServerTest.start(GuardrailServerTest.java:26)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	Suppressed: java.lang.NullPointerException: Cannot invoke "edu.testing.asesoria.guardrail.GuardrailServer.stop()" because "edu.testing.asesoria.guardrail.GuardrailServerTest.server" is null
+		at edu.testing.asesoria.guardrail.GuardrailServerTest.stop(GuardrailServerTest.java:32)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+		at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+		at java.base/java.util.Collections$UnmodifiableCollection.forEach(Collections.java:1117)
+		... 1 more
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailServerTest]/[method:cuerpoInvalido()]
+display-name: un cuerpo sin campo message devuelve 400
+]]></system-out>
+</testcase>
+<testcase name="evaluaMensajeConPan()" classname="edu.testing.asesoria.guardrail.GuardrailServerTest" time="0">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.GuardrailServer.start(GuardrailServer.java:9)
+	at edu.testing.asesoria.guardrail.GuardrailServerTest.start(GuardrailServerTest.java:26)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	Suppressed: java.lang.NullPointerException: Cannot invoke "edu.testing.asesoria.guardrail.GuardrailServer.stop()" because "edu.testing.asesoria.guardrail.GuardrailServerTest.server" is null
+		at edu.testing.asesoria.guardrail.GuardrailServerTest.stop(GuardrailServerTest.java:32)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+		at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+		at java.base/java.util.Collections$UnmodifiableCollection.forEach(Collections.java:1117)
+		... 1 more
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailServerTest]/[method:evaluaMensajeConPan()]
+display-name: un mensaje con PAN devuelve 200 con status blocked y texto enmascarado
+]]></system-out>
+</testcase>
+<testcase name="extraeCampoMessage()" classname="edu.testing.asesoria.guardrail.JsonTest" time="0.003">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.Json.stringField(Json.java:9)
+	at edu.testing.asesoria.guardrail.JsonTest.extraeCampoMessage(JsonTest.java:18)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.JsonTest]/[method:extraeCampoMessage()]
+display-name: extrae el campo message de un objeto JSON, con escapes
+]]></system-out>
+</testcase>
+<testcase name="detectaVariosHallazgos()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:detectaVariosHallazgos()]
+display-name: detecta varios hallazgos en un mismo mensaje
+]]></system-out>
+</testcase>
+<testcase name="campoAusente()" classname="edu.testing.asesoria.guardrail.JsonTest" time="0.001">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.Json.stringField(Json.java:9)
+	at edu.testing.asesoria.guardrail.JsonTest.campoAusente(JsonTest.java:25)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.JsonTest]/[method:campoAusente()]
+display-name: devuelve null si el campo no existe o el JSON no es un objeto
+]]></system-out>
+</testcase>
+<testcase name="rechazaEntradasNoNumericas()" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[method:rechazaEntradasNoNumericas()]
+display-name: rechaza entradas vacías o con caracteres no numéricos
+]]></system-out>
+</testcase>
+<testcase name="limiteDeLongitud()" classname="edu.testing.asesoria.guardrail.GuardrailPolicyTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailPolicyTest]/[method:limiteDeLongitud()]
+display-name: análisis de valores límite: 500 caracteres se permite, 501 es inválido
+]]></system-out>
+</testcase>
+<testcase name="mensajeNuloEsInvalido()" classname="edu.testing.asesoria.guardrail.GuardrailPolicyTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailPolicyTest]/[method:mensajeNuloEsInvalido()]
+display-name: un mensaje nulo se trata como inválido, no como error
+]]></system-out>
+</testcase>
+<testcase name="numeroSinLuhnNoEsTarjeta()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:numeroSinLuhnNoEsTarjeta()]
+display-name: un número largo que no cumple Luhn no es tarjeta (evita falsos positivos)
+]]></system-out>
+</testcase>
+<testcase name="aceptaNumerosValidos(String)[2]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:aceptaNumerosValidos(java.lang.String)]/[test-template-invocation:#2]
+display-name: acepta PAN válido 5500000000000004
+]]></system-out>
+</testcase>
+<testcase name="aceptaNumerosValidos(String)[1]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:aceptaNumerosValidos(java.lang.String)]/[test-template-invocation:#1]
+display-name: acepta PAN válido 4111111111111111
+]]></system-out>
+</testcase>
+<testcase name="detectaPanConEspacios()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:detectaPanConEspacios()]
+display-name: detecta un PAN con espacios y lo enmascara dejando los últimos 4 dígitos
+]]></system-out>
+</testcase>
+<testcase name="health()" classname="edu.testing.asesoria.guardrail.GuardrailServerTest" time="0">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.GuardrailServer.start(GuardrailServer.java:9)
+	at edu.testing.asesoria.guardrail.GuardrailServerTest.start(GuardrailServerTest.java:26)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	Suppressed: java.lang.NullPointerException: Cannot invoke "edu.testing.asesoria.guardrail.GuardrailServer.stop()" because "edu.testing.asesoria.guardrail.GuardrailServerTest.server" is null
+		at edu.testing.asesoria.guardrail.GuardrailServerTest.stop(GuardrailServerTest.java:32)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+		at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+		at java.base/java.util.Collections$UnmodifiableCollection.forEach(Collections.java:1117)
+		... 1 more
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailServerTest]/[method:health()]
+display-name: GET /health responde 200 con el estado del servicio
+]]></system-out>
+</testcase>
+<testcase name="serializaDecision()" classname="edu.testing.asesoria.guardrail.JsonTest" time="0.001">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.Json.toJson(Json.java:13)
+	at edu.testing.asesoria.guardrail.JsonTest.serializaDecision(JsonTest.java:34)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.JsonTest]/[method:serializaDecision()]
+display-name: serializa una decisión con hallazgos y escapa caracteres especiales
+]]></system-out>
+</testcase>
+<testcase name="mensajeLimpioSePermite()" classname="edu.testing.asesoria.guardrail.GuardrailPolicyTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailPolicyTest]/[method:mensajeLimpioSePermite()]
+display-name: un mensaje limpio se permite sin cambios
+]]></system-out>
+</testcase>
 <testcase name="mensajeVacioEsInvalido(String)[2]" classname="edu.testing.asesoria.guardrail.GuardrailPolicyTest" time="0">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailPolicyTest]/[test-template:mensajeVacioEsInvalido(java.lang.String)]/[test-template-invocation:#2]
@@ -82,13 +229,7 @@ unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest
 display-name: rechaza 0000000000000001
 ]]></system-out>
 </testcase>
-<testcase name="detectaVariosHallazgos()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0">
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:detectaVariosHallazgos()]
-display-name: detecta varios hallazgos en un mismo mensaje
-]]></system-out>
-</testcase>
-<testcase name="rechazaNumerosInvalidos(String)[2]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0">
+<testcase name="rechazaNumerosInvalidos(String)[2]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0.001">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:rechazaNumerosInvalidos(java.lang.String)]/[test-template-invocation:#2]
 display-name: rechaza 1234567890123
@@ -112,40 +253,10 @@ unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest
 display-name: acepta PAN válido 340000000000009
 ]]></system-out>
 </testcase>
-<testcase name="rechazaEntradasNoNumericas()" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0">
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[method:rechazaEntradasNoNumericas()]
-display-name: rechaza entradas vacías o con caracteres no numéricos
-]]></system-out>
-</testcase>
-<testcase name="limiteDeLongitud()" classname="edu.testing.asesoria.guardrail.GuardrailPolicyTest" time="0">
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailPolicyTest]/[method:limiteDeLongitud()]
-display-name: análisis de valores límite: 500 caracteres se permite, 501 es inválido
-]]></system-out>
-</testcase>
-<testcase name="mensajeNuloEsInvalido()" classname="edu.testing.asesoria.guardrail.GuardrailPolicyTest" time="0">
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailPolicyTest]/[method:mensajeNuloEsInvalido()]
-display-name: un mensaje nulo se trata como inválido, no como error
-]]></system-out>
-</testcase>
 <testcase name="mensajeConPanSeBloquea()" classname="edu.testing.asesoria.guardrail.GuardrailPolicyTest" time="0">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailPolicyTest]/[method:mensajeConPanSeBloquea()]
 display-name: un mensaje con PAN válido se bloquea y se devuelve enmascarado
-]]></system-out>
-</testcase>
-<testcase name="numeroSinLuhnNoEsTarjeta()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0.016">
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:numeroSinLuhnNoEsTarjeta()]
-display-name: un número largo que no cumple Luhn no es tarjeta (evita falsos positivos)
-]]></system-out>
-</testcase>
-<testcase name="aceptaNumerosValidos(String)[2]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0">
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:aceptaNumerosValidos(java.lang.String)]/[test-template-invocation:#2]
-display-name: acepta PAN válido 5500000000000004
 ]]></system-out>
 </testcase>
 <testcase name="textoLimpio()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0">
@@ -154,25 +265,43 @@ unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.Sensitiv
 display-name: texto sin datos sensibles no produce hallazgos ni cambios
 ]]></system-out>
 </testcase>
-<testcase name="aceptaNumerosValidos(String)[1]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0">
+<testcase name="metodoNoPermitido()" classname="edu.testing.asesoria.guardrail.GuardrailServerTest" time="0">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.GuardrailServer.start(GuardrailServer.java:9)
+	at edu.testing.asesoria.guardrail.GuardrailServerTest.start(GuardrailServerTest.java:26)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	Suppressed: java.lang.NullPointerException: Cannot invoke "edu.testing.asesoria.guardrail.GuardrailServer.stop()" because "edu.testing.asesoria.guardrail.GuardrailServerTest.server" is null
+		at edu.testing.asesoria.guardrail.GuardrailServerTest.stop(GuardrailServerTest.java:32)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+		at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+		at java.base/java.util.Collections$UnmodifiableCollection.forEach(Collections.java:1117)
+		... 1 more
+]]></error>
 <system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:aceptaNumerosValidos(java.lang.String)]/[test-template-invocation:#1]
-display-name: acepta PAN válido 4111111111111111
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailServerTest]/[method:metodoNoPermitido()]
+display-name: un método distinto de POST en /guardrail/evaluate devuelve 405
 ]]></system-out>
 </testcase>
-<testcase name="detectaPanConEspacios()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0">
+<testcase name="evaluaMensajeLimpio()" classname="edu.testing.asesoria.guardrail.GuardrailServerTest" time="0">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.GuardrailServer.start(GuardrailServer.java:9)
+	at edu.testing.asesoria.guardrail.GuardrailServerTest.start(GuardrailServerTest.java:26)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	Suppressed: java.lang.NullPointerException: Cannot invoke "edu.testing.asesoria.guardrail.GuardrailServer.stop()" because "edu.testing.asesoria.guardrail.GuardrailServerTest.server" is null
+		at edu.testing.asesoria.guardrail.GuardrailServerTest.stop(GuardrailServerTest.java:32)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+		at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+		at java.base/java.util.Collections$UnmodifiableCollection.forEach(Collections.java:1117)
+		... 1 more
+]]></error>
 <system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:detectaPanConEspacios()]
-display-name: detecta un PAN con espacios y lo enmascara dejando los últimos 4 dígitos
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailServerTest]/[method:evaluaMensajeLimpio()]
+display-name: un mensaje limpio devuelve status allowed
 ]]></system-out>
 </testcase>
-<testcase name="mensajeLimpioSePermite()" classname="edu.testing.asesoria.guardrail.GuardrailPolicyTest" time="0">
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailPolicyTest]/[method:mensajeLimpioSePermite()]
-display-name: un mensaje limpio se permite sin cambios
-]]></system-out>
-</testcase>
-<testcase name="detectaIbanNacional()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0.001">
+<testcase name="detectaIbanNacional()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0.002">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:detectaIbanNacional()]
 display-name: detecta un IBAN de Costa Rica y lo enmascara
