@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}AsesorIA{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" data-testid="brand">Asesor<span>IA</span></a>
+    {% if user %}
+    <nav class="nav">
+      <a href="/chat" data-testid="nav-chat">Chat</a>
+      <a href="/historial" data-testid="nav-historial">Historial</a>
+      <span class="user" data-testid="user-name">{{ user.display_name }}</span>
+      <form method="post" action="/logout" class="inline">
+        <button type="submit" class="link" data-testid="btn-logout">Salir</button>
+      </form>
+    </nav>
+    {% endif %}
+  </header>
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="footer">AsesorIA v{{ version }} · asistente de consultas para asesores financieros · entorno de pruebas</footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

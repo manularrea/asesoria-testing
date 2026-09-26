@@ -1,0 +1,97 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+[INICIO] CP-UI-02 Credenciales inválidas muestran error y no crean sesión
+   -> Intentar login con contraseña incorrecta
+   -> Verificar mensaje de error, permanencia en /login y usuario conservado
+[FIN]    CP-UI-02 Credenciales inválidas muestran error y no crean sesión
+[INICIO] CP-UI-01 Login válido redirige al chat y muestra el nombre del asesor
+   -> Abrir /login e ingresar credenciales válidas
+   -> Verificar redirección a /chat y saludo personalizado
+[FIN]    CP-UI-01 Login válido redirige al chat y muestra el nombre del asesor
+[INICIO] CP-UI-04 Cerrar sesión invalida el acceso al chat
+   -> Iniciar sesión y luego cerrar sesión
+   -> Verificar que /chat vuelve a exigir autenticación
+[FIN]    CP-UI-04 Cerrar sesión invalida el acceso al chat
+[INICIO] CP-UI-03 Acceso directo a /chat sin sesión redirige a /login
+   -> Navegar directamente a /chat sin autenticarse
+[FIN]    CP-UI-03 Acceso directo a /chat sin sesión redirige a /login
+[INICIO] CP-UI-05 El botón Enviar solo se habilita con texto en la entrada
+   -> Verificar estado inicial deshabilitado y transición al escribir
+[FIN]    CP-UI-05 El botón Enviar solo se habilita con texto en la entrada
+[INICIO] CP-UI-06 Consulta de horario devuelve la intención horario_sucursales con respuesta oficial
+   -> Enviar consulta dentro del dominio
+   -> Verificar respuesta, intención, estado y confianza visible
+[FIN]    CP-UI-06 Consulta de horario devuelve la intención horario_sucursales con respuesta oficial
+[INICIO] CP-UI-08 Mensaje con número de tarjeta es bloqueado por el guardrail
+   -> Enviar mensaje con PAN válido (Luhn)
+[FIN]    CP-UI-08 Mensaje con número de tarjeta es bloqueado por el guardrail
+[INICIO] CP-UI-07 Consulta fuera de dominio produce fallback controlado
+   -> Enviar consulta ajena al dominio financiero
+[FIN]    CP-UI-07 Consulta fuera de dominio produce fallback controlado
+[INICIO] CP-UI-09 La conversación conserva los turnos previos
+[FIN]    CP-UI-09 La conversación conserva los turnos previos
+[INICIO] CP-UI-11 El historial registra las consultas con su intención y enmascara datos sensibles
+   -> Realizar dos consultas: una válida y una con número de tarjeta
+   -> Abrir historial y verificar filas, intención y enmascaramiento
+[FIN]    CP-UI-11 El historial registra las consultas con su intención y enmascara datos sensibles
+[INICIO] CP-UI-10 Sesión nueva muestra historial vacío
+[FIN]    CP-UI-10 Sesión nueva muestra historial vacío
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  ├─ E-04 API del asistente ✔
+│  │  ├─ CP-API-01 /api/health expone estado, versión y configuración del NLU ✔
+│  │  ├─ CP-API-05 Clasificación del conjunto dorado de intenciones (10 consultas) ✔
+│  │  │  ├─ CP-API-05 [1] '¿Cuál es el horario de atención de las sucursales?' -> horario_su... ✔
+│  │  │  ├─ CP-API-05 [2] 'qué necesito para pedir un préstamo personal' -> credito_personal ✔
+│  │  │  ├─ CP-API-05 [3] 'perdí mi tarjeta de débito, ¿cómo la bloqueo?' -> bloqueo_tarjeta ✔
+│  │  │  ├─ CP-API-05 [4] 'cuánto puedo retirar del cajero por día' -> limites_cajero ✔
+│  │  │  ├─ CP-API-05 [5] 'olvidé la contraseña de la banca en línea' -> cambio_clave ✔
+│  │  │  ├─ CP-API-05 [6] 'hay un cargo que no reconozco en mi tarjeta' -> reporte_fraude ✔
+│  │  │  ├─ CP-API-05 [7] 'cómo abro una cuenta de ahorros' -> apertura_cuenta ✔
+│  │  │  ├─ CP-API-05 [8] 'tasa del CDP a 12 meses' -> tasa_cdp ✔
+│  │  │  ├─ CP-API-05 [9] 'cómo envío dinero al exterior' -> transferencias_internacionales ✔
+│  │  │  └─ CP-API-05 [10] 'descargar estado de cuenta en pdf' -> estado_cuenta ✔
+│  │  ├─ CP-API-08 La latencia de inferencia se mantiene bajo 200 ms ✔
+│  │  ├─ CP-API-06 Consultas fuera de dominio producen fallback ✔
+│  │  │  ├─ CP-API-06 [1] fuera de dominio: '¿cómo preparo una lasaña?' ✔
+│  │  │  ├─ CP-API-06 [2] fuera de dominio: 'resultado del partido de anoche' ✔
+│  │  │  └─ CP-API-06 [3] fuera de dominio: 'hola' ✔
+│  │  ├─ CP-API-07 Un PAN válido se bloquea y se almacena enmascarado ✔
+│  │  ├─ CP-API-04 Análisis de valores límite: 500 caracteres se acepta, 501 se rechaza ✔
+│  │  ├─ CP-API-09 /api/history refleja cada consulta registrada ✔
+│  │  ├─ CP-API-03 Mensaje vacío o en blanco responde 422 ✔
+│  │  │  ├─ CP-API-03 Mensaje vacío '' responde 422 ✔
+│  │  │  └─ CP-API-03 Mensaje vacío '   ' responde 422 ✔
+│  │  └─ CP-API-02 Sin sesión, /api/chat responde 401 ✔
+│  ├─ E-01 Autenticación ✔
+│  │  ├─ CP-UI-02 Credenciales inválidas muestran error y no crean sesión ✔
+│  │  ├─ CP-UI-01 Login válido redirige al chat y muestra el nombre del asesor ✔
+│  │  ├─ CP-UI-04 Cerrar sesión invalida el acceso al chat ✔
+│  │  └─ CP-UI-03 Acceso directo a /chat sin sesión redirige a /login ✔
+│  ├─ E-02 Consulta al asistente ✔
+│  │  ├─ CP-UI-05 El botón Enviar solo se habilita con texto en la entrada ✔
+│  │  ├─ CP-UI-06 Consulta de horario devuelve la intención horario_sucursales con respue... ✔
+│  │  ├─ CP-UI-08 Mensaje con número de tarjeta es bloqueado por el guardrail ✔
+│  │  ├─ CP-UI-07 Consulta fuera de dominio produce fallback controlado ✔
+│  │  └─ CP-UI-09 La conversación conserva los turnos previos ✔
+│  └─ E-03 Historial de consultas ✔
+│     ├─ CP-UI-11 El historial registra las consultas con su intención y enmascara datos ... ✔
+│     └─ CP-UI-10 Sesión nueva muestra historial vacío ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 25836 ms
+[        10 containers found      ]
+[         0 containers skipped    ]
+[        10 containers started    ]
+[         0 containers aborted    ]
+[        10 containers successful ]
+[         0 containers failed     ]
+[        32 tests found           ]
+[         0 tests skipped         ]
+[        32 tests started         ]
+[         0 tests aborted         ]
+[        32 tests successful      ]
+[         0 tests failed          ]
+

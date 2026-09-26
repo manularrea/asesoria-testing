@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Historial · AsesorIA{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Historial de consultas</h1>
+  <p class="muted">Consultas realizadas en esta sesión. Los datos sensibles se almacenan enmascarados.</p>
+  {% if items %}
+  <table class="table" data-testid="history-table">
+    <thead>
+      <tr><th>#</th><th>Hora</th><th>Consulta</th><th>Intención</th><th>Estado</th><th>Confianza</th><th>Latencia</th></tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr data-testid="history-row" data-status="{{ item.status }}">
+        <td>{{ item.id }}</td>
+        <td>{{ item.timestamp }}</td>
+        <td data-testid="history-message">{{ item.message }}</td>
+        <td data-testid="history-intent"><span class="badge badge-{{ item.status }}">{{ item.intent }}</span></td>
+        <td>{{ item.status }}</td>
+        <td>{{ '%.2f' % item.confidence if item.confidence is not none else '—' }}</td>
+        <td>{{ item.latency_ms }} ms</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="empty" data-testid="history-empty">Aún no hay consultas en esta sesión.</p>
+  {% endif %}
+</section>
+{% endblock %}

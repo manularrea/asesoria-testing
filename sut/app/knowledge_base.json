@@ -1,0 +1,115 @@
+{
+  "fallback_answer": "No tengo información suficiente para responder con seguridad. Te sugiero escalar la consulta a un supervisor o consultar el manual de productos.",
+  "intents": [
+    {
+      "intent": "horario_sucursales",
+      "utterances": [
+        "cuál es el horario de atención de las sucursales",
+        "a qué hora abren y cierran las sucursales",
+        "horario de las oficinas del banco",
+        "hasta qué hora atienden en la sucursal",
+        "los sábados abren las agencias"
+      ],
+      "answer": "Las sucursales atienden de lunes a viernes de 8:30 a 16:30 y los sábados de 9:00 a 12:00 en las agencias designadas. Los cajeros automáticos operan 24/7."
+    },
+    {
+      "intent": "apertura_cuenta",
+      "utterances": [
+        "qué necesito para abrir una cuenta de ahorros",
+        "requisitos para abrir una cuenta",
+        "cómo abro una cuenta corriente",
+        "documentos para apertura de cuenta",
+        "puede un extranjero abrir una cuenta"
+      ],
+      "answer": "Para abrir una cuenta de ahorros o corriente se requiere documento de identidad vigente, comprobante de domicilio y declaración de origen de fondos. Los clientes extranjeros deben presentar pasaporte y estatus migratorio vigente."
+    },
+    {
+      "intent": "credito_personal",
+      "utterances": [
+        "requisitos para solicitar un crédito personal",
+        "qué necesito para pedir un préstamo personal",
+        "cómo aplico a un crédito de consumo",
+        "documentos para un préstamo",
+        "cuánto tarda la aprobación de un crédito personal"
+      ],
+      "answer": "El crédito personal requiere constancia salarial de los últimos tres meses, historial crediticio sin atrasos mayores a 30 días y una relación cuota/ingreso menor al 40 %. La aprobación toma entre 3 y 5 días hábiles."
+    },
+    {
+      "intent": "tasa_cdp",
+      "utterances": [
+        "cuál es la tasa de interés del certificado de depósito a plazo",
+        "tasa que paga un cdp a 12 meses",
+        "rendimiento de los certificados de depósito",
+        "cuánto paga un depósito a plazo",
+        "tasas de inversión a plazo fijo"
+      ],
+      "answer": "Los certificados de depósito a plazo (CDP) pagan una tasa referencial del 4,25 % anual a 6 meses y 5,10 % anual a 12 meses en moneda local. La tasa vigente debe confirmarse en el tarifario del día."
+    },
+    {
+      "intent": "bloqueo_tarjeta",
+      "utterances": [
+        "cómo bloqueo mi tarjeta de crédito",
+        "perdí la tarjeta de débito qué hago",
+        "me robaron la tarjeta cómo la bloqueo",
+        "bloquear tarjeta por extravío",
+        "reponer una tarjeta bloqueada"
+      ],
+      "answer": "El bloqueo de tarjeta se realiza de inmediato desde la banca en línea (Tarjetas > Bloquear) o llamando al centro de atención 24/7. La reposición se entrega en 5 días hábiles sin costo si es por robo con denuncia."
+    },
+    {
+      "intent": "transferencias_internacionales",
+      "utterances": [
+        "cómo hago una transferencia internacional",
+        "cuánto cobra el banco por enviar dinero al exterior",
+        "datos necesarios para una transferencia swift",
+        "tiempo que tarda una transferencia al extranjero",
+        "límite para transferencias internacionales"
+      ],
+      "answer": "Las transferencias internacionales requieren el código SWIFT/BIC del banco receptor, número de cuenta o IBAN y nombre completo del beneficiario. La comisión es de USD 25 y el crédito se refleja en 1 a 3 días hábiles."
+    },
+    {
+      "intent": "cambio_clave",
+      "utterances": [
+        "cómo cambio la clave de banca en línea",
+        "olvidé mi contraseña de la banca digital",
+        "restablecer clave de acceso",
+        "bloqueé mi usuario por intentos fallidos",
+        "recuperar contraseña del app del banco"
+      ],
+      "answer": "La clave de banca en línea se cambia desde Perfil > Seguridad > Cambiar clave. Si el usuario está bloqueado por intentos fallidos, se desbloquea con la validación de identidad (token SMS y preguntas de seguridad) o en cualquier sucursal."
+    },
+    {
+      "intent": "estado_cuenta",
+      "utterances": [
+        "cómo descargo mi estado de cuenta",
+        "dónde veo el estado de cuenta de la tarjeta",
+        "enviar estado de cuenta al correo",
+        "consultar movimientos del mes",
+        "estado de cuenta en pdf"
+      ],
+      "answer": "El estado de cuenta se descarga en PDF desde Cuentas > Estados de cuenta en la banca en línea; también puede activarse el envío mensual automático al correo registrado. Están disponibles los últimos 24 meses."
+    },
+    {
+      "intent": "limites_cajero",
+      "utterances": [
+        "cuál es el límite de retiro en cajero automático",
+        "cuánto puedo sacar del cajero por día",
+        "aumentar el límite de retiro diario",
+        "monto máximo de retiro en atm",
+        "límite de retiro con tarjeta de débito"
+      ],
+      "answer": "El límite diario de retiro en cajeros automáticos es de 500.000 colones o USD 1.000 por tarjeta de débito. Puede ajustarse temporalmente desde la banca en línea hasta el doble del límite estándar."
+    },
+    {
+      "intent": "reporte_fraude",
+      "utterances": [
+        "cómo reporto un fraude en mi cuenta",
+        "vi un cargo que no reconozco en la tarjeta",
+        "me estafaron por teléfono qué hago",
+        "reclamo por transacción no reconocida",
+        "reportar una compra fraudulenta"
+      ],
+      "answer": "Ante una transacción no reconocida: bloquear la tarjeta, presentar el reclamo en Tarjetas > Reclamos con el detalle del cargo y adjuntar la denuncia si aplica. El banco responde en un máximo de 10 días hábiles conforme a la normativa de protección al consumidor financiero."
+    }
+  ]
+}

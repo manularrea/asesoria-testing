@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Chat · AsesorIA{% endblock %}
+{% block content %}
+<section class="card chat">
+  <div class="chat-header">
+    <h1>Asistente de consultas</h1>
+    <p class="muted" data-testid="chat-greeting">Hola, {{ user.display_name }}. Escribe la consulta del cliente y te indico la respuesta oficial del producto.</p>
+  </div>
+  <div class="messages" data-testid="chat-messages" aria-live="polite"></div>
+  <form class="composer" data-testid="chat-form" autocomplete="off">
+    <input type="text" name="message" placeholder="Ej.: ¿cuál es el horario de las sucursales?"
+           maxlength="500" data-testid="chat-input" aria-label="Mensaje">
+    <button type="submit" class="primary" disabled data-testid="chat-send">Enviar</button>
+  </form>
+  <p class="hint muted">Umbral de confianza del motor NLU: {{ threshold }}. No ingreses números de tarjeta ni de cuenta.</p>
+</section>
+{% endblock %}
+{% block scripts %}<script src="/static/chat.js"></script>{% endblock %}

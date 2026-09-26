@@ -1,0 +1,27 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.1.1, pluggy-1.6.0 -- /home/claude/asesoria-testing/sut/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/claude/asesoria-testing/sut
+plugins: anyio-4.15.1
+collecting ... collected 18 items
+
+tests/test_guardrails.py::test_luhn_acepta_pan_valido_y_rechaza_invalido PASSED [  5%]
+tests/test_guardrails.py::test_detecta_tarjeta_y_enmascara PASSED        [ 11%]
+tests/test_guardrails.py::test_numero_largo_sin_luhn_no_es_tarjeta PASSED [ 16%]
+tests/test_guardrails.py::test_detecta_iban_nacional PASSED              [ 22%]
+tests/test_guardrails.py::test_longitud_rechaza_vacio[] PASSED           [ 27%]
+tests/test_guardrails.py::test_longitud_rechaza_vacio[   ] PASSED        [ 33%]
+tests/test_guardrails.py::test_longitud_limites PASSED                   [ 38%]
+tests/test_nlu.py::test_normalize_quita_tildes_y_puntuacion PASSED       [ 44%]
+tests/test_nlu.py::test_clasifica_intencion_esperada[\xbfCu\xe1l es el horario de atenci\xf3n de las sucursales?-horario_sucursales] PASSED [ 50%]
+tests/test_nlu.py::test_clasifica_intencion_esperada[qu\xe9 necesito para pedir un pr\xe9stamo personal-credito_personal] PASSED [ 55%]
+tests/test_nlu.py::test_clasifica_intencion_esperada[perd\xed mi tarjeta de d\xe9bito, \xbfc\xf3mo la bloqueo?-bloqueo_tarjeta] PASSED [ 61%]
+tests/test_nlu.py::test_clasifica_intencion_esperada[cu\xe1nto puedo retirar del cajero por d\xeda-limites_cajero] PASSED [ 66%]
+tests/test_nlu.py::test_clasifica_intencion_esperada[olvid\xe9 la contrase\xf1a de la banca en l\xednea-cambio_clave] PASSED [ 72%]
+tests/test_nlu.py::test_clasifica_intencion_esperada[hay un cargo que no reconozco en mi tarjeta-reporte_fraude] PASSED [ 77%]
+tests/test_nlu.py::test_fuera_de_dominio_produce_fallback[c\xf3mo preparo una lasa\xf1a] PASSED [ 83%]
+tests/test_nlu.py::test_fuera_de_dominio_produce_fallback[resultado del partido de anoche] PASSED [ 88%]
+tests/test_nlu.py::test_fuera_de_dominio_produce_fallback[xyz qwe] PASSED [ 94%]
+tests/test_nlu.py::test_mensaje_vacio_produce_fallback_con_confianza_cero PASSED [100%]
+
+============================== 18 passed in 0.98s ==============================

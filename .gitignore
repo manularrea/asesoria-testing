@@ -1,0 +1,10 @@
+# Python
+sut/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+# Java / Maven
+tests-e2e/target/
+# Logs y temporales
+sut.log
+.DS_Store
