@@ -1,0 +1,166 @@
+# Pipeline CI/CD · AsesorIA (Unidad 3: TDD + BDD + SonarCloud + JaCoCo)
+#
+#   tdd-java ──┐
+#              ├── sonar ──┐
+#   tdd-python ┘           ├── resumen
+#   bdd-e2e ───────────────┘
+#
+# Secretos requeridos en el repositorio: SONAR_TOKEN (SonarCloud). GITHUB_TOKEN lo provee Actions.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
+env:
+  JAVA_VERSION: "17"
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  # ---------------------------------------------------------------- TDD (Java)
+  tdd-java:
+    name: TDD · guardrail-service (JUnit 5 + JaCoCo)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults: { run: { working-directory: guardrail-service } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: "${{ env.JAVA_VERSION }}", cache: maven }
+      - name: Pruebas unitarias + cobertura + quality gate local (jacoco:check)
+        run: mvn -B --no-transfer-progress verify
+      - name: Resumen de cobertura en el job
+        if: always()
+        run: |
+          python3 - <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          import csv, glob
+          rows = list(csv.DictReader(open(glob.glob("target/site/jacoco/jacoco.csv")[0])))
+          lc = sum(int(r["LINE_COVERED"]) for r in rows); lm = sum(int(r["LINE_MISSED"]) for r in rows)
+          bc = sum(int(r["BRANCH_COVERED"]) for r in rows); bm = sum(int(r["BRANCH_MISSED"]) for r in rows)
+          print(f"### JaCoCo guardrail-service\n\n| Métrica | Valor |\n|---|---|\n| Líneas | {lc}/{lc+lm} ({lc/(lc+lm):.1%}) |\n| Ramas | {bc}/{bc+bm} ({bc/(bc+bm):.1%}) |")
+          EOF
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: jacoco-guardrail-service
+          path: |
+            guardrail-service/target/site/jacoco
+            guardrail-service/target/surefire-reports
+      - name: Publicar jar del servicio para el job BDD
+        uses: actions/upload-artifact@v4
+        with: { name: guardrail-service-jar, path: guardrail-service/target/guardrail-service-*.jar }
+
+  # -------------------------------------------------------------- TDD (Python)
+  tdd-python:
+    name: TDD · SUT AsesorIA (pytest + coverage)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults: { run: { working-directory: sut } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "${{ env.PYTHON_VERSION }}", cache: pip, cache-dependency-path: sut/requirements.txt }
+      - run: pip install -r requirements.txt pytest-cov
+      - name: Pruebas unitarias y de componente con cobertura
+        run: |
+          pytest -q tests --cov=app --cov-report=xml:coverage.xml --cov-report=term --cov-fail-under=85 \
+                 --junitxml=pytest-report.xml | tee pytest.log
+          { echo "### pytest SUT"; echo '```'; tail -12 pytest.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: coverage-sut, path: "sut/coverage.xml\nsut/pytest-report.xml\nsut/pytest.log" }
+
+  # ----------------------------------------------------------------- SonarCloud
+  sonar:
+    name: Calidad · SonarCloud (quality gate)
+    runs-on: ubuntu-latest
+    needs: [tdd-java, tdd-python]
+    timeout-minutes: 10
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }          # historial completo para "código nuevo"
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: "${{ env.JAVA_VERSION }}", cache: maven }
+      - name: Compilar guardrail-service (Sonar necesita los .class)
+        run: mvn -B --no-transfer-progress -f guardrail-service/pom.xml -DskipTests compile
+      - uses: actions/download-artifact@v4
+        with: { name: jacoco-guardrail-service, path: guardrail-service/target }
+      - uses: actions/download-artifact@v4
+        with: { name: coverage-sut, path: sut }
+      - name: Análisis SonarCloud (usa sonar-project.properties)
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Esperar el resultado del quality gate (falla el pipeline si no se cumple)
+        uses: SonarSource/sonarqube-quality-gate-action@v1
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  # ------------------------------------------------------------ BDD / E2E
+  bdd-e2e:
+    name: BDD · Cucumber + Playwright (servicio + SUT reales)
+    runs-on: ubuntu-latest
+    needs: [tdd-java, tdd-python]
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: "${{ env.JAVA_VERSION }}", cache: maven }
+      - uses: actions/setup-python@v5
+        with: { python-version: "${{ env.PYTHON_VERSION }}", cache: pip, cache-dependency-path: sut/requirements.txt }
+      - uses: actions/download-artifact@v4
+        with: { name: guardrail-service-jar, path: guardrail-service/target }
+      - name: Levantar guardrail-service y el SUT
+        run: |
+          java -jar guardrail-service/target/guardrail-service-*.jar 8090 > guardrail.log 2>&1 &
+          pip install -r sut/requirements.txt
+          (cd sut && GUARDRAIL_URL=http://localhost:8090 uvicorn app.main:app --port 8000 > ../sut.log 2>&1 &)
+          for i in $(seq 1 30); do curl -fs localhost:8000/api/health && curl -fs localhost:8090/health && break; sleep 1; done
+          curl -fs localhost:8000/api/health | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Instalar Chromium para Playwright
+        working-directory: tests-e2e
+        run: mvn -B --no-transfer-progress exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install --with-deps chromium"
+      - name: Escenarios BDD (Cucumber-JVM) y suite de regresión (JUnit 5 + Playwright)
+        working-directory: tests-e2e
+        run: mvn -B --no-transfer-progress test -Dsut.baseUrl=http://localhost:8000
+      - name: Publicar resultados JUnit/Cucumber como check
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Resultados JUnit + Cucumber
+          path: tests-e2e/target/surefire-reports/TEST-*.xml
+          reporter: java-junit
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidencia-bdd-e2e
+          path: |
+            tests-e2e/target/cucumber
+            tests-e2e/target/evidence
+            tests-e2e/target/surefire-reports
+            guardrail.log
+            sut.log
+
+  # ----------------------------------------------------------------- resumen
+  resumen:
+    name: Resumen del pipeline
+    runs-on: ubuntu-latest
+    needs: [sonar, bdd-e2e]
+    if: always()
+    steps:
+      - run: |
+          echo "| Job | Resultado |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|---|---|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| TDD Java + JaCoCo | ${{ needs.tdd-java.result || 'n/a' }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| SonarCloud quality gate | ${{ needs.sonar.result }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| BDD + E2E | ${{ needs.bdd-e2e.result }} |" >> "$GITHUB_STEP_SUMMARY"
