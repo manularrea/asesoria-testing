@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="JUnit Jupiter" tests="8" skipped="0" failures="0" errors="0" time="0.088" hostname="vm" timestamp="2026-09-26T18:24:56">
+<testsuite name="JUnit Jupiter" tests="14" skipped="0" failures="0" errors="6" time="0.117" hostname="vm" timestamp="2026-09-26T18:25:25">
 <properties>
 <property name="file.encoding" value="UTF-8"/>
 <property name="file.separator" value="/"/>
@@ -58,31 +58,45 @@
 <property name="user.name" value="root"/>
 <property name="user.timezone" value="America/Bogota"/>
 </properties>
-<testcase name="aceptaNumerosValidos(String)[2]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0">
+<testcase name="detectaPanConGuiones()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0.001">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.SensitiveDataDetector.detect(SensitiveDataDetector.java:9)
+	at edu.testing.asesoria.guardrail.SensitiveDataDetectorTest.detectaPanConGuiones(SensitiveDataDetectorTest.java:31)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></error>
 <system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:aceptaNumerosValidos(java.lang.String)]/[test-template-invocation:#2]
-display-name: acepta PAN válido 5500000000000004
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:detectaPanConGuiones()]
+display-name: detecta un PAN con guiones
 ]]></system-out>
 </testcase>
-<testcase name="aceptaNumerosValidos(String)[1]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0.001">
-<system-out><![CDATA[
-unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:aceptaNumerosValidos(java.lang.String)]/[test-template-invocation:#1]
-display-name: acepta PAN válido 4111111111111111
-]]></system-out>
-</testcase>
-<testcase name="rechazaNumerosInvalidos(String)[3]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0">
+<testcase name="rechazaNumerosInvalidos(String)[3]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0.001">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:rechazaNumerosInvalidos(java.lang.String)]/[test-template-invocation:#3]
 display-name: rechaza 0000000000000001
 ]]></system-out>
 </testcase>
-<testcase name="rechazaNumerosInvalidos(String)[2]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0">
+<testcase name="detectaVariosHallazgos()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.SensitiveDataDetector.detect(SensitiveDataDetector.java:9)
+	at edu.testing.asesoria.guardrail.SensitiveDataDetectorTest.detectaVariosHallazgos(SensitiveDataDetectorTest.java:55)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:detectaVariosHallazgos()]
+display-name: detecta varios hallazgos en un mismo mensaje
+]]></system-out>
+</testcase>
+<testcase name="rechazaNumerosInvalidos(String)[2]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0.002">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:rechazaNumerosInvalidos(java.lang.String)]/[test-template-invocation:#2]
 display-name: rechaza 1234567890123
 ]]></system-out>
 </testcase>
-<testcase name="rechazaNumerosInvalidos(String)[1]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0.029">
+<testcase name="rechazaNumerosInvalidos(String)[1]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0.016">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:rechazaNumerosInvalidos(java.lang.String)]/[test-template-invocation:#1]
 display-name: rechaza 4111111111111112
@@ -100,10 +114,74 @@ unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest
 display-name: acepta PAN válido 340000000000009
 ]]></system-out>
 </testcase>
-<testcase name="rechazaEntradasNoNumericas()" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0.001">
+<testcase name="rechazaEntradasNoNumericas()" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[method:rechazaEntradasNoNumericas()]
 display-name: rechaza entradas vacías o con caracteres no numéricos
+]]></system-out>
+</testcase>
+<testcase name="numeroSinLuhnNoEsTarjeta()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0.011">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.SensitiveDataDetector.detect(SensitiveDataDetector.java:9)
+	at edu.testing.asesoria.guardrail.SensitiveDataDetectorTest.numeroSinLuhnNoEsTarjeta(SensitiveDataDetectorTest.java:37)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:numeroSinLuhnNoEsTarjeta()]
+display-name: un número largo que no cumple Luhn no es tarjeta (evita falsos positivos)
+]]></system-out>
+</testcase>
+<testcase name="aceptaNumerosValidos(String)[2]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:aceptaNumerosValidos(java.lang.String)]/[test-template-invocation:#2]
+display-name: acepta PAN válido 5500000000000004
+]]></system-out>
+</testcase>
+<testcase name="textoLimpio()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0.001">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.SensitiveDataDetector.detect(SensitiveDataDetector.java:9)
+	at edu.testing.asesoria.guardrail.SensitiveDataDetectorTest.textoLimpio(SensitiveDataDetectorTest.java:63)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:textoLimpio()]
+display-name: texto sin datos sensibles no produce hallazgos ni cambios
+]]></system-out>
+</testcase>
+<testcase name="aceptaNumerosValidos(String)[1]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:aceptaNumerosValidos(java.lang.String)]/[test-template-invocation:#1]
+display-name: acepta PAN válido 4111111111111111
+]]></system-out>
+</testcase>
+<testcase name="detectaPanConEspacios()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0.001">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.SensitiveDataDetector.detect(SensitiveDataDetector.java:9)
+	at edu.testing.asesoria.guardrail.SensitiveDataDetectorTest.detectaPanConEspacios(SensitiveDataDetectorTest.java:21)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:detectaPanConEspacios()]
+display-name: detecta un PAN con espacios y lo enmascara dejando los últimos 4 dígitos
+]]></system-out>
+</testcase>
+<testcase name="detectaIbanNacional()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0.001">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.SensitiveDataDetector.detect(SensitiveDataDetector.java:9)
+	at edu.testing.asesoria.guardrail.SensitiveDataDetectorTest.detectaIbanNacional(SensitiveDataDetectorTest.java:45)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:detectaIbanNacional()]
+display-name: detecta un IBAN de Costa Rica y lo enmascara
 ]]></system-out>
 </testcase>
 <system-out><![CDATA[
