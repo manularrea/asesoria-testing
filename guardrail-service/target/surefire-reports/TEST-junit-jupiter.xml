@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="JUnit Jupiter" tests="14" skipped="0" failures="0" errors="0" time="0.099" hostname="vm" timestamp="2026-09-26T18:25:39">
+<testsuite name="JUnit Jupiter" tests="20" skipped="0" failures="0" errors="6" time="0.143" hostname="vm" timestamp="2026-09-26T18:26:03">
 <properties>
 <property name="file.encoding" value="UTF-8"/>
 <property name="file.separator" value="/"/>
@@ -58,6 +58,104 @@
 <property name="user.name" value="root"/>
 <property name="user.timezone" value="America/Bogota"/>
 </properties>
+<testcase name="mensajeVacioEsInvalido(String)[2]" classname="edu.testing.asesoria.guardrail.GuardrailPolicyTest" time="0.002">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.GuardrailPolicy.evaluate(GuardrailPolicy.java:11)
+	at edu.testing.asesoria.guardrail.GuardrailPolicyTest.mensajeVacioEsInvalido(GuardrailPolicyTest.java:42)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:1024)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at java.base/java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:276)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at java.base/java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:276)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailPolicyTest]/[test-template:mensajeVacioEsInvalido(java.lang.String)]/[test-template-invocation:#2]
+display-name: mensaje vacío '   ' es inválido
+]]></system-out>
+</testcase>
+<testcase name="mensajeVacioEsInvalido(String)[1]" classname="edu.testing.asesoria.guardrail.GuardrailPolicyTest" time="0.002">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.GuardrailPolicy.evaluate(GuardrailPolicy.java:11)
+	at edu.testing.asesoria.guardrail.GuardrailPolicyTest.mensajeVacioEsInvalido(GuardrailPolicyTest.java:42)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:1024)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at java.base/java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:276)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at java.base/java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:276)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailPolicyTest]/[test-template:mensajeVacioEsInvalido(java.lang.String)]/[test-template-invocation:#1]
+display-name: mensaje vacío '' es inválido
+]]></system-out>
+</testcase>
 <testcase name="detectaPanConGuiones()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:detectaPanConGuiones()]
@@ -76,13 +174,13 @@ unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.Sensitiv
 display-name: detecta varios hallazgos en un mismo mensaje
 ]]></system-out>
 </testcase>
-<testcase name="rechazaNumerosInvalidos(String)[2]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0">
+<testcase name="rechazaNumerosInvalidos(String)[2]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0.001">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:rechazaNumerosInvalidos(java.lang.String)]/[test-template-invocation:#2]
 display-name: rechaza 1234567890123
 ]]></system-out>
 </testcase>
-<testcase name="rechazaNumerosInvalidos(String)[1]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0.016">
+<testcase name="rechazaNumerosInvalidos(String)[1]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0.015">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:rechazaNumerosInvalidos(java.lang.String)]/[test-template-invocation:#1]
 display-name: rechaza 4111111111111112
@@ -94,7 +192,7 @@ unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest
 display-name: acepta PAN válido 6011000000000004
 ]]></system-out>
 </testcase>
-<testcase name="aceptaNumerosValidos(String)[3]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0.001">
+<testcase name="aceptaNumerosValidos(String)[3]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:aceptaNumerosValidos(java.lang.String)]/[test-template-invocation:#3]
 display-name: acepta PAN válido 340000000000009
@@ -106,7 +204,46 @@ unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest
 display-name: rechaza entradas vacías o con caracteres no numéricos
 ]]></system-out>
 </testcase>
-<testcase name="numeroSinLuhnNoEsTarjeta()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0.011">
+<testcase name="limiteDeLongitud()" classname="edu.testing.asesoria.guardrail.GuardrailPolicyTest" time="0.002">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.GuardrailPolicy.evaluate(GuardrailPolicy.java:11)
+	at edu.testing.asesoria.guardrail.GuardrailPolicyTest.limiteDeLongitud(GuardrailPolicyTest.java:50)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailPolicyTest]/[method:limiteDeLongitud()]
+display-name: análisis de valores límite: 500 caracteres se permite, 501 es inválido
+]]></system-out>
+</testcase>
+<testcase name="mensajeNuloEsInvalido()" classname="edu.testing.asesoria.guardrail.GuardrailPolicyTest" time="0.001">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.GuardrailPolicy.evaluate(GuardrailPolicy.java:11)
+	at edu.testing.asesoria.guardrail.GuardrailPolicyTest.mensajeNuloEsInvalido(GuardrailPolicyTest.java:59)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailPolicyTest]/[method:mensajeNuloEsInvalido()]
+display-name: un mensaje nulo se trata como inválido, no como error
+]]></system-out>
+</testcase>
+<testcase name="mensajeConPanSeBloquea()" classname="edu.testing.asesoria.guardrail.GuardrailPolicyTest" time="0.002">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.GuardrailPolicy.evaluate(GuardrailPolicy.java:11)
+	at edu.testing.asesoria.guardrail.GuardrailPolicyTest.mensajeConPanSeBloquea(GuardrailPolicyTest.java:32)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailPolicyTest]/[method:mensajeConPanSeBloquea()]
+display-name: un mensaje con PAN válido se bloquea y se devuelve enmascarado
+]]></system-out>
+</testcase>
+<testcase name="numeroSinLuhnNoEsTarjeta()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0.015">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:numeroSinLuhnNoEsTarjeta()]
 display-name: un número largo que no cumple Luhn no es tarjeta (evita falsos positivos)
@@ -130,10 +267,23 @@ unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest
 display-name: acepta PAN válido 4111111111111111
 ]]></system-out>
 </testcase>
-<testcase name="detectaPanConEspacios()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0">
+<testcase name="detectaPanConEspacios()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0.001">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:detectaPanConEspacios()]
 display-name: detecta un PAN con espacios y lo enmascara dejando los últimos 4 dígitos
+]]></system-out>
+</testcase>
+<testcase name="mensajeLimpioSePermite()" classname="edu.testing.asesoria.guardrail.GuardrailPolicyTest" time="0.014">
+<error message="pendiente (TDD: fase roja)" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: pendiente (TDD: fase roja)
+	at edu.testing.asesoria.guardrail.GuardrailPolicy.evaluate(GuardrailPolicy.java:11)
+	at edu.testing.asesoria.guardrail.GuardrailPolicyTest.mensajeLimpioSePermite(GuardrailPolicyTest.java:23)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailPolicyTest]/[method:mensajeLimpioSePermite()]
+display-name: un mensaje limpio se permite sin cambios
 ]]></system-out>
 </testcase>
 <testcase name="detectaIbanNacional()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0.001">
