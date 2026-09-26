@@ -20,6 +20,19 @@ class JsonTest {
   }
 
   @Test
+  @DisplayName("decodifica escapes unicode, tabulador y retorno de carro")
+  void decodificaEscapes() {
+    assertEquals("a\tb\rc ñ", Json.stringField("{\"message\":\"a\\tb\\rc \\u00f1\"}", "message"));
+    assertEquals("x\\y/z", Json.stringField("{\"message\":\"x\\\\y\\/z\"}", "message"));
+  }
+
+  @Test
+  @DisplayName("escapa saltos de línea, tabuladores y retornos al serializar")
+  void escapaControles() {
+    assertEquals("l1\\nl2\\tl3\\r", Json.escape("l1\nl2\tl3\r"));
+  }
+
+  @Test
   @DisplayName("devuelve null si el campo no existe o el JSON no es un objeto")
   void campoAusente() {
     assertNull(Json.stringField("{\"otro\": \"x\"}", "message"));

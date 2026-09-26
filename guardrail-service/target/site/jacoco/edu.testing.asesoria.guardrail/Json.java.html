@@ -34,12 +34,12 @@ final class Json {
   static String escape(String s) {
 <span class="fc" id="L35">    StringBuilder sb = new StringBuilder();</span>
 <span class="fc bfc" id="L36" title="All 2 branches covered.">    for (char c : s.toCharArray()) {</span>
-<span class="pc bpc" id="L37" title="4 of 6 branches missed.">      switch (c) {</span>
+<span class="pc bpc" id="L37" title="1 of 6 branches missed.">      switch (c) {</span>
 <span class="fc" id="L38">        case '&quot;' -&gt; sb.append(&quot;\\\&quot;&quot;);</span>
 <span class="nc" id="L39">        case '\\' -&gt; sb.append(&quot;\\\\&quot;);</span>
-<span class="nc" id="L40">        case '\n' -&gt; sb.append(&quot;\\n&quot;);</span>
-<span class="nc" id="L41">        case '\r' -&gt; sb.append(&quot;\\r&quot;);</span>
-<span class="nc" id="L42">        case '\t' -&gt; sb.append(&quot;\\t&quot;);</span>
+<span class="fc" id="L40">        case '\n' -&gt; sb.append(&quot;\\n&quot;);</span>
+<span class="fc" id="L41">        case '\r' -&gt; sb.append(&quot;\\r&quot;);</span>
+<span class="fc" id="L42">        case '\t' -&gt; sb.append(&quot;\\t&quot;);</span>
 <span class="fc" id="L43">        default -&gt; sb.append(c);</span>
       }
     }
@@ -52,14 +52,14 @@ final class Json {
 <span class="fc" id="L52">      char c = s.charAt(i);</span>
 <span class="pc bpc" id="L53" title="1 of 4 branches missed.">      if (c == '\\' &amp;&amp; i + 1 &lt; s.length()) {</span>
 <span class="fc" id="L54">        char n = s.charAt(++i);</span>
-<span class="pc bpc" id="L55" title="3 of 5 branches missed.">        switch (n) {</span>
+<span class="fc bfc" id="L55" title="All 5 branches covered.">        switch (n) {</span>
 <span class="fc" id="L56">          case 'n' -&gt; sb.append('\n');</span>
-<span class="nc" id="L57">          case 'r' -&gt; sb.append('\r');</span>
-<span class="nc" id="L58">          case 't' -&gt; sb.append('\t');</span>
+<span class="fc" id="L57">          case 'r' -&gt; sb.append('\r');</span>
+<span class="fc" id="L58">          case 't' -&gt; sb.append('\t');</span>
           case 'u' -&gt; {
-<span class="nc" id="L60">            sb.append((char) Integer.parseInt(s.substring(i + 1, i + 5), 16));</span>
-<span class="nc" id="L61">            i += 4;</span>
-<span class="nc" id="L62">          }</span>
+<span class="fc" id="L60">            sb.append((char) Integer.parseInt(s.substring(i + 1, i + 5), 16));</span>
+<span class="fc" id="L61">            i += 4;</span>
+<span class="fc" id="L62">          }</span>
 <span class="fc" id="L63">          default -&gt; sb.append(n);   // \&quot; \\ \/</span>
         }
 <span class="fc" id="L65">      } else {</span>

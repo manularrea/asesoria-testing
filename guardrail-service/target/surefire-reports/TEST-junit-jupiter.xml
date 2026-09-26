@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="JUnit Jupiter" tests="28" skipped="0" failures="0" errors="0" time="0.692" hostname="vm" timestamp="2026-09-26T18:27:31">
+<testsuite name="JUnit Jupiter" tests="30" skipped="0" failures="0" errors="0" time="0.656" hostname="vm" timestamp="2026-09-26T18:27:54">
 <properties>
 <property name="file.encoding" value="UTF-8"/>
 <property name="file.separator" value="/"/>
@@ -58,16 +58,22 @@
 <property name="user.name" value="root"/>
 <property name="user.timezone" value="America/Bogota"/>
 </properties>
-<testcase name="cuerpoInvalido()" classname="edu.testing.asesoria.guardrail.GuardrailServerTest" time="0.094">
+<testcase name="cuerpoInvalido()" classname="edu.testing.asesoria.guardrail.GuardrailServerTest" time="0.102">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailServerTest]/[method:cuerpoInvalido()]
 display-name: un cuerpo sin campo message devuelve 400
 ]]></system-out>
 </testcase>
-<testcase name="evaluaMensajeConPan()" classname="edu.testing.asesoria.guardrail.GuardrailServerTest" time="0.055">
+<testcase name="evaluaMensajeConPan()" classname="edu.testing.asesoria.guardrail.GuardrailServerTest" time="0.05">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailServerTest]/[method:evaluaMensajeConPan()]
 display-name: un mensaje con PAN devuelve 200 con status blocked y texto enmascarado
+]]></system-out>
+</testcase>
+<testcase name="decodificaEscapes()" classname="edu.testing.asesoria.guardrail.JsonTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.JsonTest]/[method:decodificaEscapes()]
+display-name: decodifica escapes unicode, tabulador y retorno de carro
 ]]></system-out>
 </testcase>
 <testcase name="extraeCampoMessage()" classname="edu.testing.asesoria.guardrail.JsonTest" time="0">
@@ -130,7 +136,7 @@ unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.Sensitiv
 display-name: detecta un PAN con espacios y lo enmascara dejando los últimos 4 dígitos
 ]]></system-out>
 </testcase>
-<testcase name="health()" classname="edu.testing.asesoria.guardrail.GuardrailServerTest" time="0.108">
+<testcase name="health()" classname="edu.testing.asesoria.guardrail.GuardrailServerTest" time="0.09">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.GuardrailServerTest]/[method:health()]
 display-name: GET /health responde 200 con el estado del servicio
@@ -178,7 +184,7 @@ unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest
 display-name: rechaza 1234567890123
 ]]></system-out>
 </testcase>
-<testcase name="rechazaNumerosInvalidos(String)[1]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0.008">
+<testcase name="rechazaNumerosInvalidos(String)[1]" classname="edu.testing.asesoria.guardrail.LuhnTest" time="0.007">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:rechazaNumerosInvalidos(java.lang.String)]/[test-template-invocation:#1]
 display-name: rechaza 4111111111111112
@@ -194,6 +200,12 @@ display-name: acepta PAN válido 6011000000000004
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.LuhnTest]/[test-template:aceptaNumerosValidos(java.lang.String)]/[test-template-invocation:#3]
 display-name: acepta PAN válido 340000000000009
+]]></system-out>
+</testcase>
+<testcase name="escapaControles()" classname="edu.testing.asesoria.guardrail.JsonTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.JsonTest]/[method:escapaControles()]
+display-name: escapa saltos de línea, tabuladores y retornos al serializar
 ]]></system-out>
 </testcase>
 <testcase name="mensajeConPanSeBloquea()" classname="edu.testing.asesoria.guardrail.GuardrailPolicyTest" time="0">
@@ -220,7 +232,7 @@ unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.Guardrai
 display-name: un mensaje limpio devuelve status allowed
 ]]></system-out>
 </testcase>
-<testcase name="detectaIbanNacional()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0">
+<testcase name="detectaIbanNacional()" classname="edu.testing.asesoria.guardrail.SensitiveDataDetectorTest" time="0.001">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:edu.testing.asesoria.guardrail.SensitiveDataDetectorTest]/[method:detectaIbanNacional()]
 display-name: detecta un IBAN de Costa Rica y lo enmascara
