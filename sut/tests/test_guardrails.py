@@ -1,7 +1,13 @@
 """Pruebas unitarias de los guardrails de entrada (pytest)."""
 import pytest
 
-from app.guardrails import MAX_MESSAGE_LENGTH, detect_pii, luhn_valid, mask, validate_length
+from app.guardrails import (
+    MAX_MESSAGE_LENGTH,
+    detect_pii,
+    luhn_valid,
+    mask,
+    validate_length,
+)
 
 
 def test_luhn_acepta_pan_valido_y_rechaza_invalido():

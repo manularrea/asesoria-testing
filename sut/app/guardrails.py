@@ -94,7 +94,8 @@ def _evaluate_remote(text: str, base_url: str, timeout: float = 2.0) -> Decision
     payload = json.dumps({"message": text}).encode("utf-8")
     request = urllib.request.Request(f"{base_url.rstrip('/')}/guardrail/evaluate", data=payload,
                                      headers={"Content-Type": "application/json"}, method="POST")
-    with urllib.request.urlopen(request, timeout=timeout) as response:  # noqa: S310 (URL interna configurada)
+    # nosec B310: la URL proviene de configuración interna (GUARDRAIL_URL) y el esquema es fijo (http/https).
+    with urllib.request.urlopen(request, timeout=timeout) as response:  # nosec B310
         body = json.loads(response.read().decode("utf-8"))
     return Decision(body["status"], body["maskedMessage"], body["reason"], "service")
 

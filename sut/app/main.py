@@ -34,7 +34,7 @@ app.add_middleware(
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 templates = Jinja2Templates(directory=BASE_DIR / "templates")
 
-classifier = IntentClassifier(threshold=float(os.getenv("NLU_THRESHOLD", DEFAULT_THRESHOLD)))
+classifier = IntentClassifier(threshold=float(os.getenv("NLU_THRESHOLD", str(DEFAULT_THRESHOLD))))
 HISTORY: dict[str, list[dict]] = {}  # historial de consultas por sesión (en memoria)
 
 

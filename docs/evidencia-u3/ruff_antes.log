@@ -1,0 +1,54 @@
+RUF100 [*] Unused `noqa` directive (non-enabled: `S310`)
+  --> app/guardrails.py:97:73
+   |
+95 |     request = urllib.request.Request(f"{base_url.rstrip('/')}/guardrail/evaluate", data=payload,
+96 |                                      headers={"Content-Type": "application/json"}, method="POST")
+97 |     with urllib.request.urlopen(request, timeout=timeout) as response:  # noqa: S310 (URL interna configurada)
+   |                                                                         ^^^^^^^^^^^^
+98 |         body = json.loads(response.read().decode("utf-8"))
+99 |     return Decision(body["status"], body["maskedMessage"], body["reason"], "service")
+   |
+help: Remove unused `noqa` directive
+   |
+96 |                                      headers={"Content-Type": "application/json"}, method="POST")
+   -     with urllib.request.urlopen(request, timeout=timeout) as response:  # noqa: S310 (URL interna configurada)
+97 +     with urllib.request.urlopen(request, timeout=timeout) as response:
+98 |         body = json.loads(response.read().decode("utf-8"))
+   |
+
+DTZ005 `datetime.datetime.now()` called without a `tz` argument
+   --> app/main.py:129:22
+    |
+127 |     record = {
+128 |         "id": len(HISTORY.setdefault(request.session.get("sid", ""), [])) + 1,
+129 |         "timestamp": datetime.now().strftime("%H:%M:%S"),
+    |                      ^^^^^^^^^^^^^^
+130 |         "message": stored_message,
+131 |         "latency_ms": latency_ms,
+    |
+help: Pass a `datetime.timezone` object to the `tz` parameter
+
+I001 [*] Import block is un-sorted or un-formatted
+ --> tests/test_guardrails.py:2:1
+  |
+1 |   """Pruebas unitarias de los guardrails de entrada (pytest)."""
+2 | / import pytest
+3 | |
+4 | | from app.guardrails import MAX_MESSAGE_LENGTH, detect_pii, luhn_valid, mask, validate_length
+  | |____________________________________________________________________________________________^
+help: Organize imports
+   |
+3  |
+   - from app.guardrails import MAX_MESSAGE_LENGTH, detect_pii, luhn_valid, mask, validate_length
+4  + from app.guardrails import (
+5  +     MAX_MESSAGE_LENGTH,
+6  +     detect_pii,
+7  +     luhn_valid,
+8  +     mask,
+9  +     validate_length,
+10 + )
+11 |
+   |
+
+Found 3 errors.
+[*] 2 fixable with the `--fix` option.
