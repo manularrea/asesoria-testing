@@ -102,3 +102,25 @@ mvn test -Dtest=RunCucumberTest -Dheadless=false -DslowMo=300    # ver el navega
 
 Evidencia: `target/cucumber/reporte.html` (reporte Cucumber con capturas incrustadas por escenario), `target/cucumber/reporte.json`,
 `target/evidence/screenshots-bdd/` y `target/evidence/videos-bdd/`. `mvn test` sin filtros ejecuta la suite de la Unidad 1 y los escenarios BDD.
+
+## 7. Unidad 3 · TDD + BDD + CI/CD (SonarCloud y JaCoCo)
+
+| Artefacto | Ruta |
+|---|---|
+| Servicio desarrollado con TDD (Java 17, sin dependencias, JaCoCo con `check`) | `guardrail-service/` — historial `git log` con ciclos RED → GREEN → REFACTOR |
+| Integración en el SUT (`GUARDRAIL_URL`, degradación a local) + pruebas de componente | `sut/app/guardrails.py`, `sut/tests/test_api.py`, `sut/tests/test_guardrail_integration.py` |
+| Escenarios BDD ampliados (PAN/IBAN) + verificación cruzada con Cucumber.js | `tests-e2e/src/test/resources/features/`, `tests-bdd-js/` |
+| Pipeline y análisis de calidad | `.github/workflows/ci.yml`, `sonar-project.properties` |
+| Informe técnico y evidencia | `docs/Informe_TDD_BDD_CICD_AsesorIA_Unidad3.docx`, `docs/evidencia-u3/` |
+
+```bash
+cd guardrail-service && mvn verify                      # 30 pruebas JUnit 5 + JaCoCo (falla si líneas < 85 % o ramas < 75 %)
+java -jar target/guardrail-service-1.0.0.jar 8090        # servicio en :8090
+cd ../sut && GUARDRAIL_URL=http://localhost:8090 uvicorn app.main:app --port 8000
+pytest -q tests --cov=app --cov-fail-under=85            # 31 pruebas, 99 % de cobertura
+cd ../tests-e2e && mvn test                               # 32 pruebas de regresión + escenarios Cucumber-JVM
+cd ../tests-bdd-js && npm install && npm test             # mismo .feature con Cucumber.js (verificación cruzada)
+```
+
+Pipeline: `push` a `main` ejecuta `ci.yml` (jobs `tdd-java`, `tdd-python`, `sonar`, `bdd-e2e`, `resumen`). Requiere el secreto `SONAR_TOKEN`
+y ajustar `sonar.organization` / `sonar.projectKey` en `sonar-project.properties`.
