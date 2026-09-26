@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Luhn.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">guardrail-service</a> &gt; <a href="index.source.html" class="el_package">edu.testing.asesoria.guardrail</a> &gt; <span class="el_source">Luhn.java</span></div><h1>Luhn.java</h1><pre class="source lang-java linenums">package edu.testing.asesoria.guardrail;
+
+/** Verificación de dígito de control (ISO/IEC 7812) para números de tarjeta. */
+public final class Luhn {
+
+  private Luhn() {}
+
+  /** @return true si {@code digits} contiene solo dígitos y su suma de Luhn es múltiplo de 10. */
+  public static boolean isValid(String digits) {
+<span class="fc bfc" id="L10" title="All 6 branches covered.">    if (digits == null || digits.isEmpty() || !digits.chars().allMatch(Character::isDigit)) {</span>
+<span class="fc" id="L11">      return false;</span>
+    }
+<span class="fc" id="L13">    int sum = 0;</span>
+<span class="fc" id="L14">    boolean doubleIt = false;</span>
+<span class="fc bfc" id="L15" title="All 2 branches covered.">    for (int i = digits.length() - 1; i &gt;= 0; i--) {</span>
+<span class="fc" id="L16">      int d = digits.charAt(i) - '0';</span>
+<span class="fc bfc" id="L17" title="All 2 branches covered.">      if (doubleIt) {</span>
+<span class="fc" id="L18">        d *= 2;</span>
+<span class="fc bfc" id="L19" title="All 2 branches covered.">        if (d &gt; 9) {</span>
+<span class="fc" id="L20">          d -= 9;</span>
+        }
+      }
+<span class="fc" id="L23">      sum += d;</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">      doubleIt = !doubleIt;</span>
+    }
+<span class="fc bfc" id="L26" title="All 2 branches covered.">    return sum % 10 == 0;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.0000</span></div></body></html>

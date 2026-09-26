@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GuardrailServer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">guardrail-service</a> &gt; <a href="index.source.html" class="el_package">edu.testing.asesoria.guardrail</a> &gt; <span class="el_source">GuardrailServer.java</span></div><h1>GuardrailServer.java</h1><pre class="source lang-java linenums">package edu.testing.asesoria.guardrail;
+
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpServer;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
+
+/**
+ * Servicio HTTP del guardrail de datos sensibles (solo JDK, sin dependencias):
+ * GET /health · POST /guardrail/evaluate {&quot;message&quot;: &quot;...&quot;}.
+ * Es el componente que el SUT AsesorIA invoca antes de la inferencia cuando GUARDRAIL_URL está definido.
+ */
+public final class GuardrailServer {
+
+  private static final String VERSION = &quot;1.0.0&quot;;
+  private final HttpServer server;
+<span class="fc" id="L20">  private final GuardrailPolicy policy = new GuardrailPolicy();</span>
+
+<span class="fc" id="L22">  private GuardrailServer(HttpServer server) {</span>
+<span class="fc" id="L23">    this.server = server;</span>
+<span class="fc" id="L24">  }</span>
+
+  public static GuardrailServer start(int port) throws IOException {
+<span class="fc" id="L27">    HttpServer http = HttpServer.create(new InetSocketAddress(port), 0);</span>
+<span class="fc" id="L28">    GuardrailServer instance = new GuardrailServer(http);</span>
+<span class="fc" id="L29">    http.createContext(&quot;/health&quot;, instance::health);</span>
+<span class="fc" id="L30">    http.createContext(&quot;/guardrail/evaluate&quot;, instance::evaluate);</span>
+<span class="fc" id="L31">    http.start();</span>
+<span class="fc" id="L32">    return instance;</span>
+  }
+
+  public int port() {
+<span class="fc" id="L36">    return server.getAddress().getPort();</span>
+  }
+
+  public void stop() {
+<span class="fc" id="L40">    server.stop(0);</span>
+<span class="fc" id="L41">  }</span>
+
+  private void health(HttpExchange exchange) throws IOException {
+<span class="fc" id="L44">    respond(exchange, 200, &quot;{\&quot;status\&quot;:\&quot;ok\&quot;,\&quot;service\&quot;:\&quot;guardrail\&quot;,\&quot;version\&quot;:\&quot;&quot; + VERSION + &quot;\&quot;}&quot;);</span>
+<span class="fc" id="L45">  }</span>
+
+  private void evaluate(HttpExchange exchange) throws IOException {
+<span class="fc bfc" id="L48" title="All 2 branches covered.">    if (!&quot;POST&quot;.equalsIgnoreCase(exchange.getRequestMethod())) {</span>
+<span class="fc" id="L49">      respond(exchange, 405, &quot;{\&quot;error\&quot;:\&quot;método no permitido\&quot;}&quot;);</span>
+<span class="fc" id="L50">      return;</span>
+    }
+<span class="fc" id="L52">    String body = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);</span>
+<span class="fc" id="L53">    String message = Json.stringField(body, &quot;message&quot;);</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">    if (message == null) {</span>
+<span class="fc" id="L55">      respond(exchange, 400, &quot;{\&quot;error\&quot;:\&quot;se requiere el campo message\&quot;}&quot;);</span>
+<span class="fc" id="L56">      return;</span>
+    }
+<span class="fc" id="L58">    respond(exchange, 200, Json.toJson(policy.evaluate(message)));</span>
+<span class="fc" id="L59">  }</span>
+
+  private static void respond(HttpExchange exchange, int status, String json) throws IOException {
+<span class="fc" id="L62">    byte[] bytes = json.getBytes(StandardCharsets.UTF_8);</span>
+<span class="fc" id="L63">    exchange.getResponseHeaders().add(&quot;Content-Type&quot;, &quot;application/json; charset=utf-8&quot;);</span>
+<span class="fc" id="L64">    exchange.sendResponseHeaders(status, bytes.length);</span>
+<span class="fc" id="L65">    try (OutputStream out = exchange.getResponseBody()) {</span>
+<span class="fc" id="L66">      out.write(bytes);</span>
+    }
+<span class="fc" id="L68">  }</span>
+
+  public static void main(String[] args) throws IOException {
+<span class="nc bnc" id="L71" title="All 2 branches missed.">    int port = Integer.parseInt(args.length &gt; 0 ? args[0] : System.getenv().getOrDefault(&quot;GUARDRAIL_PORT&quot;, &quot;8090&quot;));</span>
+<span class="nc" id="L72">    GuardrailServer instance = start(port);</span>
+<span class="nc" id="L73">    System.out.println(&quot;guardrail-service &quot; + VERSION + &quot; escuchando en http://localhost:&quot; + instance.port());</span>
+<span class="nc" id="L74">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.0000</span></div></body></html>

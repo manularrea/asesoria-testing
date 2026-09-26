@@ -1,0 +1,10 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+guardrail-service,edu.testing.asesoria.guardrail,Decision,0,15,0,0,0,1,0,1,0,1
+guardrail-service,edu.testing.asesoria.guardrail,Finding.Type,0,15,0,0,0,1,0,1,0,1
+guardrail-service,edu.testing.asesoria.guardrail,Json,52,168,10,17,11,28,10,11,0,4
+guardrail-service,edu.testing.asesoria.guardrail,Luhn,0,59,0,16,0,13,0,9,0,1
+guardrail-service,edu.testing.asesoria.guardrail,GuardrailServer,23,120,2,4,4,31,2,9,1,7
+guardrail-service,edu.testing.asesoria.guardrail,Finding,0,12,0,0,0,1,0,1,0,1
+guardrail-service,edu.testing.asesoria.guardrail,Decision.Status,0,21,0,0,0,1,0,1,0,1
+guardrail-service,edu.testing.asesoria.guardrail,GuardrailPolicy,0,61,0,8,0,10,0,6,0,2
+guardrail-service,edu.testing.asesoria.guardrail,SensitiveDataDetector,2,107,2,10,1,22,2,8,0,4

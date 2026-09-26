@@ -1,0 +1,21 @@
+<project name="jacoco-report" default="report" basedir=".">
+  <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml" classpath="/usr/share/java/org.jacoco.ant.jar:/usr/share/java/org.jacoco.core.jar:/usr/share/java/org.jacoco.report.jar:/usr/share/java/asm.jar:/usr/share/java/asm-commons.jar:/usr/share/java/asm-tree.jar"/>
+  <target name="report" xmlns:jacoco="antlib:org.jacoco.ant">
+    <jacoco:report>
+      <executiondata><file file="jacoco.exec"/></executiondata>
+      <structure name="guardrail-service">
+        <classfiles><fileset dir="classes"/></classfiles>
+        <sourcefiles encoding="UTF-8"><fileset dir="../src/main/java"/></sourcefiles>
+      </structure>
+      <html destdir="site/jacoco"/>
+      <xml destfile="site/jacoco/jacoco.xml"/>
+      <csv destfile="site/jacoco/jacoco.csv"/>
+      <check failonviolation="true" violationsproperty="violation">
+        <rule element="BUNDLE">
+          <limit counter="LINE" value="COVEREDRATIO" minimum="0.85"/>
+          <limit counter="BRANCH" value="COVEREDRATIO" minimum="0.75"/>
+        </rule>
+      </check>
+    </jacoco:report>
+  </target>
+</project>
