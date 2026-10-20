@@ -16,3 +16,10 @@ sut/pytest-report.xml
 sut/.coverage
 tests-bdd-js/node_modules/
 tests-bdd-js/reporte-cucumber.*
+# Unidad 4
+asesoria-planes/node_modules/
+asesoria-planes/.next/
+asesoria-planes/test-results/
+asesoria-planes/playwright-report/
+asesoria-planes/.env*.local
+asesoria-planes/.vercel/

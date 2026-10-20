@@ -1,0 +1,22 @@
+
+Running 12 tests using 1 worker
+
+  ✓   1 [chromium] › tests/e2e/api.spec.ts:3:5 › TC011 Contrato de la API: health, checkout y sesión (93ms)
+  ✓   2 [chromium] › tests/e2e/catalogo.spec.ts:5:7 › Landing y catálogo › TC001 La landing presenta la propuesta de valor, el CTA y el resumen de los tres planes (519ms)
+  ✓   3 [chromium] › tests/e2e/catalogo.spec.ts:15:7 › Landing y catálogo › TC002 El catálogo lista los planes con precios correctos y destaca el plan Pro (329ms)
+  ✓   4 [chromium] › tests/e2e/catalogo.spec.ts:26:7 › Landing y catálogo › TC003 El checkout muestra el plan y el precio seleccionados (3.6s)
+  ✓   5 [chromium] › tests/e2e/checkout.spec.ts:6:7 › Checkout y pasarela › TC004 El checkout rechaza un correo inválido sin redirigir a la pasarela (397ms)
+  ✓   6 [chromium] › tests/e2e/checkout.spec.ts:15:7 › Checkout y pasarela › TC005 Un plan inexistente en el checkout devuelve 404 (317ms)
+  ✓   7 [chromium] › tests/e2e/checkout.spec.ts:21:7 › Checkout y pasarela › TC006 Flujo de pago exitoso de extremo a extremo (3.9s)
+  ✓   8 [chromium] › tests/e2e/checkout.spec.ts:38:7 › Checkout y pasarela › TC007 Activar la suscripción muestra el plan en Mi cuenta y en la cabecera (916ms)
+  ✓   9 [chromium] › tests/e2e/checkout.spec.ts:48:7 › Checkout y pasarela › TC008 Cancelar en la pasarela lleva a /cancelado y permite reintentar el mismo plan (894ms)
+  ✓  10 [chromium] › tests/e2e/checkout.spec.ts:59:7 › Checkout y pasarela › TC009 La pasarela rechaza una tarjeta inválida y no confirma el pago (542ms)
+  ✓  11 [chromium] › tests/e2e/checkout.spec.ts:66:7 › Checkout y pasarela › TC010 Una sesión de pago inválida o manipulada no muestra la confirmación ni activa la suscripción (381ms)
+  ✓  12 [chromium] › tests/e2e/checkout.spec.ts:76:7 › Checkout y pasarela › TC012 Cancelar la suscripción desde Mi cuenta elimina el plan activo (1.1s)
+
+  12 passed (14.0s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report[39m
+[36m[39m

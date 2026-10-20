@@ -1,0 +1,2 @@
+{"test":"TC003 El checkout muestra el plan y el precio seleccionados","element":"botón Suscribirse (Pro)","failed":"testId=btn-subscribe-pro","healed":"role=link name=Suscribirse","at":"2026-10-20T23:09:09.029Z"}
+{"test":"TC006 Flujo de pago exitoso de extremo a extremo","element":"botón Pagar","failed":"testId=btn-pay","healed":"role=button name=/^Pagar/","at":"2026-10-20T23:09:13.594Z"}

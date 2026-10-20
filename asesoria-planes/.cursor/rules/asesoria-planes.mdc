@@ -1,0 +1,14 @@
+---
+description: Convenciones del MVP AsesorIA Planes (Next.js 15 + Stripe) para generación y pruebas con IA
+globs: ["**/*.ts", "**/*.tsx"]
+alwaysApply: true
+---
+- Stack: Next.js 15 App Router, TypeScript estricto, React 19, sin librerías de UI; estilos en app/globals.css.
+- Pagos: toda interacción con la pasarela pasa por lib/payments.ts (PaymentProvider). Nunca llamar a Stripe desde componentes.
+  El proveedor mock (PAYMENTS_PROVIDER=mock) debe seguir funcionando: es el que usan TestSprite/Playwright en CI.
+- Seguridad: no almacenar datos de tarjeta; verificar en el servidor (retrieve) antes de mostrar éxito o activar; cookies firmadas.
+- Testabilidad: todo elemento interactivo o de resultado lleva data-testid estable en español (p. ej. checkout-pagar, exito-plan)
+  y un nombre accesible; los errores usan role="alert". No cambiar testids existentes sin actualizar tests/e2e y el plan de TestSprite.
+- Pruebas: tests/e2e implementa testsprite_tests/testsprite_frontend_test_plan.json (TC001..TC012). Un cambio funcional actualiza
+  primero el plan (id, título, pasos) y luego la prueba. Usar tests/support/healing.ts para localizadores con alternativas.
+- Idioma de UI y mensajes: español neutro (Costa Rica). Moneda: "USD 49".

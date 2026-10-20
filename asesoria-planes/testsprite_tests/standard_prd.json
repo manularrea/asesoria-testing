@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "project": "asesoria-planes",
+    "version": "0.1.0",
+    "date": "2026-10-20",
+    "prepared_by": "Manuela Larrea (con asistencia de agente de IA)",
+    "source": "Documento de requisitos del producto (PRD) usado como entrada para TestSprite y para el plan de pruebas E2E"
+  },
+  "product_overview": "AsesorIA Planes es el portal de suscripción del asistente de IA para asesores financieros. Permite comparar planes, iniciar una suscripción mensual pagando con Stripe Checkout (modo test) y activar la cuenta tras la confirmación del pago. Está construido con Next.js 15 (App Router, TypeScript), se despliega automáticamente en Vercel desde GitHub y expone una capa de pagos intercambiable (Stripe / mock) para pruebas deterministas en CI.",
+  "core_goals": [
+    "Convertir visitantes en suscriptores con un flujo de pago de tres pasos (plan → datos → pasarela).",
+    "Nunca almacenar datos de tarjeta: el cobro ocurre en la página alojada del proveedor.",
+    "Garantizar que solo un pago confirmado activa la suscripción (verificación servidor a servidor de la sesión).",
+    "Ser verificable de extremo a extremo por agentes de prueba (TestSprite, Playwright) sin cargos reales."
+  ],
+  "key_features": [
+    {"id": "F1", "name": "Landing y catálogo", "description": "Página de inicio con propuesta de valor, CTA y resumen de planes; catálogo /planes con tres planes (Básico USD 19, Pro USD 49 destacado, Enterprise USD 199) y botón Suscribirse por plan."},
+    {"id": "F2", "name": "Checkout", "description": "Página /checkout?plan=<id> con resumen del plan y formulario de correo de facturación; valida el correo y crea la sesión de pago vía POST /api/checkout; plan inexistente → 404."},
+    {"id": "F3", "name": "Pasarela de pagos", "description": "Proveedor Stripe (Checkout, suscripción mensual, success/cancel URLs, webhook firmado) o proveedor mock stateless (sesión firmada HMAC, página simulada con tarjeta de prueba 4242…, pagar/cancelar)."},
+    {"id": "F4", "name": "Confirmación y activación", "description": "/exito?session_id= verifica la sesión en el servidor y muestra plan, importe, correo y referencia solo si paymentStatus=paid; botón Activar crea una cookie firmada con la suscripción; /cancelado permite reintentar."},
+    {"id": "F5", "name": "Mi cuenta", "description": "/cuenta muestra la suscripción activa (plan, correo, fecha, proveedor) y permite cancelarla; sin suscripción invita a ver planes; la cabecera muestra el plan activo."},
+    {"id": "F6", "name": "API y observabilidad", "description": "GET /api/health (estado, proveedor, commit), GET /api/session/{id}, POST /api/webhook (Stripe), POST /api/activar, DELETE /api/activar."}
+  ],
+  "user_flows": [
+    "Visitante → Landing → Ver planes → Suscribirse (Pro) → Checkout (correo) → Pasarela → Pago exitoso → /exito → Activar → /cuenta con plan Pro.",
+    "Visitante → Checkout → Pasarela → Cancelar → /cancelado → Reintentar → Checkout del mismo plan.",
+    "Visitante con suscripción → /cuenta → Cancelar suscripción → /planes (sin plan activo)."
+  ],
+  "validation_criteria": [
+    "Los precios mostrados en landing, catálogo, checkout, pasarela y confirmación coinciden con el catálogo.",
+    "Un correo inválido no crea sesión de pago y muestra un error accesible (role=alert).",
+    "Una sesión de pago no confirmada, manipulada o inexistente nunca muestra la pantalla de éxito ni activa la suscripción (402).",
+    "La cancelación en la pasarela no activa ninguna suscripción.",
+    "Todas las acciones críticas tienen identificadores estables (data-testid) y nombres accesibles para localizadores resilientes."
+  ],
+  "tech_stack": ["Next.js 15", "React 19", "TypeScript", "Stripe SDK", "Vercel", "GitHub Actions", "Playwright 1.56", "TestSprite MCP"],
+  "test_environment": {"local": "http://localhost:3000 con PAYMENTS_PROVIDER=mock", "staging": "URL de Vercel (preview) con Stripe en modo test", "credentials": "tarjeta de prueba Stripe 4242 4242 4242 4242, cualquier fecha futura y CVC"}
+}

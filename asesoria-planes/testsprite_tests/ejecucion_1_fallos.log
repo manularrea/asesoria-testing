@@ -1,0 +1,254 @@
+
+Running 12 tests using 1 worker
+
+[31mConfiguration Error: HTML reporter output folder clashes with the tests output folder:[39m
+
+    html reporter folder: [1m/home/claude/asesoria-testing/asesoria-planes/test-results/html[22m
+    test results folder: [1m/home/claude/asesoria-testing/asesoria-planes/test-results[22m
+
+HTML reporter will clear its output directory prior to being generated, which will lead to the artifact loss.
+
+  ✓   1 [chromium] › tests/e2e/api.spec.ts:3:5 › TC011 Contrato de la API: health, checkout y sesión (111ms)
+  ✘   2 [chromium] › tests/e2e/catalogo.spec.ts:5:7 › Landing y catálogo › TC001 La landing presenta la propuesta de valor, el CTA y el resumen de los tres planes (8.2s)
+  ✘   3 [chromium] › tests/e2e/catalogo.spec.ts:15:7 › Landing y catálogo › TC002 El catálogo lista los planes con precios correctos y destaca el plan Pro (7.7s)
+  ✓   4 [chromium] › tests/e2e/catalogo.spec.ts:26:7 › Landing y catálogo › TC003 El checkout muestra el plan y el precio seleccionados (3.7s)
+  ✘   5 [chromium] › tests/e2e/checkout.spec.ts:6:7 › Checkout y pasarela › TC004 El checkout rechaza un correo inválido sin redirigir a la pasarela (474ms)
+  ✓   6 [chromium] › tests/e2e/checkout.spec.ts:15:7 › Checkout y pasarela › TC005 Un plan inexistente en el checkout devuelve 404 (415ms)
+  ✘   7 [chromium] › tests/e2e/checkout.spec.ts:21:7 › Checkout y pasarela › TC006 Flujo de pago exitoso de extremo a extremo (8.0s)
+  ✘   8 [chromium] › tests/e2e/checkout.spec.ts:38:7 › Checkout y pasarela › TC007 Activar la suscripción muestra el plan en Mi cuenta y en la cabecera (8.4s)
+  ✓   9 [chromium] › tests/e2e/checkout.spec.ts:48:7 › Checkout y pasarela › TC008 Cancelar en la pasarela lleva a /cancelado y permite reintentar el mismo plan (884ms)
+  ✓  10 [chromium] › tests/e2e/checkout.spec.ts:59:7 › Checkout y pasarela › TC009 La pasarela rechaza una tarjeta inválida y no confirma el pago (529ms)
+  ✓  11 [chromium] › tests/e2e/checkout.spec.ts:66:7 › Checkout y pasarela › TC010 Una sesión de pago inválida o manipulada no muestra la confirmación ni activa la suscripción (407ms)
+  ✓  12 [chromium] › tests/e2e/checkout.spec.ts:76:7 › Checkout y pasarela › TC012 Cancelar la suscripción desde Mi cuenta elimina el plan activo (1.1s)
+
+
+  1) [chromium] › tests/e2e/catalogo.spec.ts:5:7 › Landing y catálogo › TC001 La landing presenta la propuesta de valor, el CTA y el resumen de los tres planes 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByTestId('resumen-planes')
+    Timeout: 7000ms
+    [32m- Expected  - 3[39m
+    [31m+ Received  + 1[39m
+
+    [2m  Array [[22m
+    [32m-   "$19",[39m
+    [32m-   "$49",[39m
+    [32m-   "$199",[39m
+    [31m+   "BásicoUSD 19 / mesPara un asesor o una sucursal pequeña.ProUSD 49 / mesPara equipos de servicio al cliente.EnterpriseUSD 199 / mesPara entidades reguladas con múltiples canales.",[39m
+    [2m  ][22m
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 7000ms[22m
+    [2m  - waiting for getByTestId('resumen-planes')[22m
+    [2m    11 × locator resolved to 1 element[22m
+
+
+       8 |     const resumen = page.getByTestId("resumen-planes");
+       9 |     await expect(resumen.locator(".card")).toHaveCount(3);
+    > 10 |     await expect(resumen).toContainText(["$19", "$49", "$199"]);
+         |                           ^
+      11 |     await page.getByTestId("cta-ver-planes").click();
+      12 |     await expect(page).toHaveURL(/\/planes$/);
+      13 |   });
+        at /home/claude/asesoria-testing/asesoria-planes/tests/e2e/catalogo.spec.ts:10:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/catalogo-Landing-y-catálog-9f9c5--resumen-de-los-tres-planes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/catalogo-Landing-y-catálog-9f9c5--resumen-de-los-tres-planes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/catalogo-Landing-y-catálog-9f9c5--resumen-de-los-tres-planes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/catalogo-Landing-y-catálog-9f9c5--resumen-de-los-tres-planes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/catalogo-Landing-y-catálog-9f9c5--resumen-de-los-tres-planes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/e2e/catalogo.spec.ts:15:7 › Landing y catálogo › TC002 El catálogo lista los planes con precios correctos y destaca el plan Pro 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByTestId('precio-basico')
+    Expected substring: [32m"$19"[39m
+    Received string:    [31m"USD 19 / mes"[39m
+    Timeout: 7000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 7000ms[22m
+    [2m  - waiting for getByTestId('precio-basico')[22m
+    [2m    11 × locator resolved to <div class="precio" data-testid="precio-basico">…</div>[22m
+    [2m       - unexpected value "USD 19 / mes"[22m
+
+
+      15 |   test("TC002 El catálogo lista los planes con precios correctos y destaca el plan Pro", async ({ page }) => {
+      16 |     await page.goto("/planes");
+    > 17 |     await expect(page.getByTestId("precio-basico")).toContainText("$19");
+         |                                                     ^
+      18 |     await expect(page.getByTestId("precio-pro")).toContainText("$49");
+      19 |     await expect(page.getByTestId("precio-enterprise")).toContainText("$199");
+      20 |     await expect(page.getByTestId("plan-pro")).toContainText("Más elegido");
+        at /home/claude/asesoria-testing/asesoria-planes/tests/e2e/catalogo.spec.ts:17:53
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/catalogo-Landing-y-catálog-35b9f-ectos-y-destaca-el-plan-Pro-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/catalogo-Landing-y-catálog-35b9f-ectos-y-destaca-el-plan-Pro-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/catalogo-Landing-y-catálog-35b9f-ectos-y-destaca-el-plan-Pro-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/catalogo-Landing-y-catálog-35b9f-ectos-y-destaca-el-plan-Pro-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/catalogo-Landing-y-catálog-35b9f-ectos-y-destaca-el-plan-Pro-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests/e2e/checkout.spec.ts:6:7 › Checkout y pasarela › TC004 El checkout rechaza un correo inválido sin redirigir a la pasarela 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByRole('alert')
+    Expected: [32m"Correo electrónico inválido."[39m
+    Error: strict mode violation: getByRole('alert') resolved to 2 elements:
+        1) <div role="alert" class="alert" data-testid="checkout-error">Correo electrónico inválido.</div> aka getByTestId('checkout-error')
+        2) <div role="alert" aria-live="assertive" id="__next-route-announcer__"></div> aka locator('[id="__next-route-announcer__"]')
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 7000ms[22m
+    [2m  - waiting for getByRole('alert')[22m
+
+
+       9 |     await page.getByTestId("checkout-pagar").click();
+      10 |     const error = page.getByRole("alert");
+    > 11 |     await expect(error).toHaveText("Correo electrónico inválido.");
+         |                         ^
+      12 |     await expect(page).toHaveURL(/\/checkout\?plan=pro$/);
+      13 |   });
+      14 |
+        at /home/claude/asesoria-testing/asesoria-planes/tests/e2e/checkout.spec.ts:11:25
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/checkout-Checkout-y-pasare-a9214-sin-redirigir-a-la-pasarela-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/checkout-Checkout-y-pasare-a9214-sin-redirigir-a-la-pasarela-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/checkout-Checkout-y-pasare-a9214-sin-redirigir-a-la-pasarela-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/checkout-Checkout-y-pasare-a9214-sin-redirigir-a-la-pasarela-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/checkout-Checkout-y-pasare-a9214-sin-redirigir-a-la-pasarela-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › tests/e2e/checkout.spec.ts:21:7 › Checkout y pasarela › TC006 Flujo de pago exitoso de extremo a extremo 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByTestId('gateway-importe')
+    Expected substring: [32m"$49"[39m
+    Received string:    [31m"USD 49 / mes"[39m
+    Timeout: 7000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 7000ms[22m
+    [2m  - waiting for getByTestId('gateway-importe')[22m
+    [2m    11 × locator resolved to <dd data-testid="gateway-importe">…</dd>[22m
+    [2m       - unexpected value "USD 49 / mes"[22m
+
+
+      21 |   test("TC006 Flujo de pago exitoso de extremo a extremo", async ({ page }, testInfo) => {
+      22 |     await irALaPasarela(page, "pro");
+    > 23 |     await expect(page.getByTestId("gateway-importe")).toContainText("$49");
+         |                                                       ^
+      24 |     await expect(page.getByTestId("gateway-email")).toHaveText(CORREO);
+      25 |     // El botón de pago se localiza de forma auto-curable (testid obsoleto a propósito → rol + nombre).
+      26 |     const pagar = await heal(page, "botón Pagar", { testId: "btn-pay", role: { role: "button", name: /^Pagar/ } }, { test: testInfo.title });
+        at /home/claude/asesoria-testing/asesoria-planes/tests/e2e/checkout.spec.ts:23:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/checkout-Checkout-y-pasare-a70e5-xitoso-de-extremo-a-extremo-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/checkout-Checkout-y-pasare-a70e5-xitoso-de-extremo-a-extremo-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/checkout-Checkout-y-pasare-a70e5-xitoso-de-extremo-a-extremo-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/checkout-Checkout-y-pasare-a70e5-xitoso-de-extremo-a-extremo-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/checkout-Checkout-y-pasare-a70e5-xitoso-de-extremo-a-extremo-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › tests/e2e/checkout.spec.ts:38:7 › Checkout y pasarela › TC007 Activar la suscripción muestra el plan en Mi cuenta y en la cabecera 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByTestId('nav-plan-activo')
+    Expected: [32m"Plan Pro"[39m
+    Timeout: 7000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 7000ms[22m
+    [2m  - waiting for getByTestId('nav-plan-activo')[22m
+
+
+      42 |     await expect(page.getByTestId("cuenta-plan")).toHaveText("Pro");
+      43 |     await expect(page.getByTestId("cuenta-email")).toHaveText(CORREO);
+    > 44 |     await expect(page.getByTestId("nav-plan-activo")).toHaveText("Plan Pro");
+         |                                                       ^
+      45 |     await page.screenshot({ path: "test-results/evidencia/TC007_cuenta.png", fullPage: true });
+      46 |   });
+      47 |
+        at /home/claude/asesoria-testing/asesoria-planes/tests/e2e/checkout.spec.ts:44:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/checkout-Checkout-y-pasare-6e25b--Mi-cuenta-y-en-la-cabecera-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/checkout-Checkout-y-pasare-6e25b--Mi-cuenta-y-en-la-cabecera-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/checkout-Checkout-y-pasare-6e25b--Mi-cuenta-y-en-la-cabecera-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/checkout-Checkout-y-pasare-6e25b--Mi-cuenta-y-en-la-cabecera-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/checkout-Checkout-y-pasare-6e25b--Mi-cuenta-y-en-la-cabecera-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5 failed
+    [chromium] › tests/e2e/catalogo.spec.ts:5:7 › Landing y catálogo › TC001 La landing presenta la propuesta de valor, el CTA y el resumen de los tres planes 
+    [chromium] › tests/e2e/catalogo.spec.ts:15:7 › Landing y catálogo › TC002 El catálogo lista los planes con precios correctos y destaca el plan Pro 
+    [chromium] › tests/e2e/checkout.spec.ts:6:7 › Checkout y pasarela › TC004 El checkout rechaza un correo inválido sin redirigir a la pasarela 
+    [chromium] › tests/e2e/checkout.spec.ts:21:7 › Checkout y pasarela › TC006 Flujo de pago exitoso de extremo a extremo 
+    [chromium] › tests/e2e/checkout.spec.ts:38:7 › Checkout y pasarela › TC007 Activar la suscripción muestra el plan en Mi cuenta y en la cabecera 
+  7 passed (45.3s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report test-results/html[39m
+[36m[39m
