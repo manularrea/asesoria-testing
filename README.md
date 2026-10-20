@@ -124,3 +124,14 @@ cd ../tests-bdd-js && npm install && npm test             # mismo .feature con C
 
 Pipeline: `push` a `main` ejecuta `ci.yml` (jobs `tdd-java`, `tdd-python`, `sonar`, `bdd-e2e`, `resumen`). Requiere el secreto `SONAR_TOKEN`
 y ajustar `sonar.organization` / `sonar.projectKey` en `sonar-project.properties`.
+
+## 8. Unidad 4 · MVP con pasarela de pagos + pruebas E2E con IA (TestSprite)
+
+| Artefacto | Ruta |
+|---|---|
+| MVP AsesorIA Planes (Next.js 15, Stripe Checkout en modo test, proveedor mock para CI) | `asesoria-planes/` (ver su README) |
+| PRD y plan de pruebas en formato TestSprite + reporte | `asesoria-planes/testsprite_tests/` |
+| Suite Playwright que implementa el plan, con localizadores auto-curables | `asesoria-planes/tests/` |
+| Despliegue automatizado en Vercel (E2E → deploy → smoke) | `.github/workflows/deploy-planes.yml` |
+| Guía Cursor · Stripe · Vercel · TestSprite | `asesoria-planes/docs/GUIA-CURSOR-TESTSPRITE-VERCEL.md` |
+| Informe técnico y evidencia | `docs/Informe_E2E_IA_TestSprite_AsesorIA_Unidad4.docx`, `docs/evidencia-u4/` |
