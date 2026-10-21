@@ -14,5 +14,5 @@ export default async function MockCheckoutPage({ searchParams }: { searchParams:
   const details = await provider.retrieve(sessionId);
   const plan = details && getPlan(details.planId);
   if (!details || !plan) notFound();
-  return <MockGateway sessionId={sessionId} planNombre={plan.nombre} precioUsd={plan.precioUsd} email={details.email} />;
+  return <MockGateway sessionId={sessionId} planId={plan.id} planNombre={plan.nombre} precioUsd={plan.precioUsd} email={details.email} />;
 }

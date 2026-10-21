@@ -51,7 +51,9 @@ test.describe("Checkout y pasarela", () => {
     await expect(page).toHaveURL(/\/cancelado/);
     await expect(page.getByTestId("cancelado")).toContainText("No se realizó ningún cargo");
     await page.getByTestId("reintentar").click();
-    await expect(page).toHaveURL(/\/(checkout\?plan=basico|planes)/);
+    // Aserción estricta: debe reabrir el checkout del MISMO plan (TestSprite detectó que caía en /planes).
+    await expect(page).toHaveURL(/\/checkout\?plan=basico/);
+    await expect(page.getByTestId("checkout-plan")).toContainText("Básico");
     await page.goto("/cuenta");
     await expect(page.getByTestId("cuenta-sin-plan")).toBeVisible();
   });

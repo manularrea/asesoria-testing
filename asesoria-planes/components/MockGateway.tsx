@@ -2,10 +2,10 @@
 import { useState } from "react";
 import { formatUsd } from "@/lib/plans";
 
-interface Props { sessionId: string; planNombre: string; precioUsd: number; email: string }
+interface Props { sessionId: string; planId: string; planNombre: string; precioUsd: number; email: string }
 
 /** Simulación de la página de pago alojada: tarjeta de prueba, pagar o cancelar. */
-export default function MockGateway({ sessionId, planNombre, precioUsd, email }: Props) {
+export default function MockGateway({ sessionId, planId, planNombre, precioUsd, email }: Props) {
   const [card, setCard] = useState("4242 4242 4242 4242");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -22,7 +22,9 @@ export default function MockGateway({ sessionId, planNombre, precioUsd, email }:
     const data = await r.json();
     setBusy(false);
     if (!r.ok) { setError(data.error ?? "Error"); return; }
-    window.location.assign(outcome === "pay" ? `/exito?session_id=${encodeURIComponent(data.sessionId)}` : "/cancelado");
+    // Al cancelar se conserva el plan (igual que cancel_url de Stripe) para que "Reintentar" reabra el mismo checkout.
+    // Defecto detectado por TestSprite (ejecución 2026-10-20): antes redirigía a /cancelado sin plan.
+    window.location.assign(outcome === "pay" ? `/exito?session_id=${encodeURIComponent(data.sessionId)}` : `/cancelado?plan=${encodeURIComponent(planId)}`);
   }
 
   return (
