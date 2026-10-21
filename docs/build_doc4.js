@@ -155,9 +155,9 @@ const s7 = [
 const anexo = bullets([
   "Hecho: proyecto generado y refinado en Cursor (Figuras 3, 4, 6, 11); despliegue en Vercel con proveedor mock en https://asesoria-planes.vercel.app (Figura 5).",
   "Stripe: crear claves de prueba y el webhook; configurar STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET y PAYMENTS_PROVIDER=stripe en Vercel y redesplegar (guía §2–3).",
-  "GitHub: añadir VERCEL_TOKEN / VERCEL_ORG_ID / VERCEL_PROJECT_ID como secretos para que deploy-planes complete los jobs deploy y smoke-prod (guía §3).",
+  "Hecho: secretos VERCEL_* en GitHub; deploy-planes #4 completo (e2e → deploy → smoke) en verde (Figura 13); pipeline ci #7 con SonarCloud quality gate Passed.",
   "TestSprite: configurar el MCP con la API key y ejecutar el plan desde Cursor contra localhost:3001 (mock) y contra la URL de Vercel (guía §4); guardar testsprite-mcp-test-report.md y las capturas.",
-  "Sustituir las figuras 7, 12 y 13 por las capturas de TestSprite, Stripe Checkout y GitHub Actions, y añadir la comparación TestSprite vs. Playwright a la tabla de métricas.",
+  "Sustituir las figuras 7 y 12 por las capturas de TestSprite y Stripe Checkout, y añadir la comparación TestSprite vs. Playwright a la tabla de métricas.",
 ]);
 
 const doc = new Document({
@@ -197,7 +197,7 @@ const doc = new Document({
       h1("6. Soluciones técnicas y auto-curación"), healingTable,
       ...figure("code_collage_b.png", "Figura 11. Implementación del plan y del despliegue: tests/e2e/checkout.spec.ts (TC006–TC008 con heal()) y .github/workflows/deploy-planes.yml (job e2e como compuerta del deploy).", FIGW),
       ...figure("ph_stripe.png", "Figura 12. Stripe Checkout en modo test sobre el despliegue (captura pendiente; ver Anexo).", 480),
-      ...figure("ph_actions.png", "Figura 13. Pipeline deploy-planes: E2E → Vercel → smoke (captura pendiente; ver Anexo).", 480),
+      ...figure("actions_deploy_04_crop.png", "Figura 13. Pipeline deploy-planes #4 en GitHub Actions: Build + E2E (12/12, 1m 21s) → Deploy a Vercel (47 s) → Smoke en producción contra asesoria-planes.vercel.app (46 s). Status: Success.", FIGW),
       h1("7. Conclusiones"), ...s7,
       h1("Anexo. Pasos pendientes con cuentas propias"), ...anexo,
     ],
