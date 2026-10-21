@@ -154,12 +154,15 @@ jobs:
   resumen:
     name: Resumen del pipeline
     runs-on: ubuntu-latest
-    needs: [sonar, bdd-e2e]
+    needs: [tdd-java, tdd-python, sonar, bdd-e2e]
     if: always()
     steps:
       - run: |
-          echo "| Job | Resultado |" >> "$GITHUB_STEP_SUMMARY"
-          echo "|---|---|" >> "$GITHUB_STEP_SUMMARY"
-          echo "| TDD Java + JaCoCo | ${{ needs.tdd-java.result || 'n/a' }} |" >> "$GITHUB_STEP_SUMMARY"
-          echo "| SonarCloud quality gate | ${{ needs.sonar.result }} |" >> "$GITHUB_STEP_SUMMARY"
-          echo "| BDD + E2E | ${{ needs.bdd-e2e.result }} |" >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo "| Job | Resultado |"
+            echo "|---|---|"
+            echo "| TDD Java + JaCoCo | ${{ needs.tdd-java.result }} |"
+            echo "| TDD Python + coverage | ${{ needs.tdd-python.result }} |"
+            echo "| SonarCloud quality gate | ${{ needs.sonar.result }} |"
+            echo "| BDD + E2E | ${{ needs.bdd-e2e.result }} |"
+          } >> "$GITHUB_STEP_SUMMARY"
