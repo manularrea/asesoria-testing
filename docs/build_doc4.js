@@ -125,16 +125,19 @@ const revisionTable = table(["ID", "Resultado 1.ª ejecución", "Causa raíz", "
   ["TC006", "✘", "Formato de moneda en la pasarela; testid btn-pay obsoleto (curado)", "Formato USD; curación por rol «Pagar»", "✓"],
   ["TC007", "✘", "Defecto de producto: tras activar, router.push no refresca el layout y la cabecera no muestra el plan", "router.refresh() en ActivarButton", "✓"],
   ["TC008–TC012", "✓", "—", "—", "✓"],
+  ["TS · Cancelar y reintentar", "✘ (TestSprite)", "Defecto real: la pasarela mock redirigía a /cancelado sin plan y «Reintentar» caía en /planes; TC008 propio lo toleraba (expectativa laxa)", "MockGateway conserva el plan; TC008 exige /checkout?plan=…; re-run en TestSprite", "✓"],
+  ["TS · Activar sin pago", "⊘ bloqueada", "Limitación del agente UI: el control vive en la API (POST /api/activar → 402); el agente hizo GET → 405. Su sugerencia (exponer activación en /exito) se descartó por seguridad", "Cubierto por TC010/TC011 a nivel API; falso positivo documentado", "⊘"],
 ], W(10, 14, 40, 28, 8));
 
 const metricsTable = table(["Métrica", "Valor"], [
   ["Casos del plan / implementados / automatizados", "12 / 12 / 100 %"],
   ["Primera ejecución", "7 pasaron · 5 fallaron (45,3 s, con reintentos y trazas)"],
   ["Ejecución final", "12 pasaron · 0 fallaron (14,0 s)"],
-  ["Hallazgos", "1 defecto de producto (TC007) · 3 expectativas incorrectas de prueba · 1 localizador ambiguo · 2 localizadores obsoletos auto-curados"],
+  ["Hallazgos", "2 defectos de producto (TC007 cabecera; cancelación sin plan, hallado por TestSprite) · 3 expectativas incorrectas · 1 expectativa laxa (TC008) · 1 localizador ambiguo · 2 localizadores obsoletos auto-curados"],
   ["Falsos positivos", "4 de 5 fallos iniciales fueron falsos positivos del plan (no del producto): 80 %"],
   ["Cobertura funcional", "6/6 funcionalidades del PRD · categorías: 7 functional, 3 error handling, 1 security, 1 api"],
-  ["Evidencia por caso", "Reporte HTML, traza y video en fallo, capturas de TC006/TC007, registro de curaciones"],
+  ["TestSprite (nube, sobre Vercel)", "Plan generado: 43 casos / 6 casos de uso (redundante) → 11 únicos ejecutados · 1.ª ejecución 9/11 pasan, 1 falla (defecto real), 1 bloqueada · re-run tras el fix: 1/1 pasa + 1 bloqueada por diseño"],
+  ["Evidencia por caso", "Reporte HTML, traza y video en fallo, capturas de TC006/TC007, registro de curaciones; videos y reporte de TestSprite (testsprite_tests/testsprite-report-ejecucion-cloud.md)"],
 ], W(36, 64));
 
 const healingTable = table(["Problema observado", "Práctica / herramienta de auto-curación", "Aplicación en el MVP"], [
@@ -149,15 +152,15 @@ const healingTable = table(["Problema observado", "Práctica / herramienta de au
 
 const s7 = [
   p("El ejercicio confirma que la automatización E2E con agentes de IA funciona mejor cuando el producto se construye para ser probado: identificadores estables, nombres accesibles, un proveedor de pagos simulado y una API de contrato convirtieron un flujo de pago, normalmente frágil, en una suite determinista de 14 segundos que corre antes de cada despliegue. El agente generó un plan completo (funcional, errores, seguridad, API) a partir del PRD, pero la primera ejecución mostró que el 80 % de los fallos eran falsos positivos: expectativas de formato y localizadores ambiguos. Ese es el riesgo principal de las pruebas generadas por IA y la razón de revisar cada caso antes de darlo por válido; a cambio, el mismo plan encontró un defecto real de la aplicación (la cabecera no reflejaba la suscripción) que una revisión manual habría pasado por alto."),
-  p("Las técnicas de auto-curación reducen el mantenimiento, pero deben ser auditables: el helper registra cada curación y la CI la publica, de modo que una curación no oculte un cambio funcional. En un contexto bancario esto importa tanto como la cobertura: una prueba que «se cura sola» sin dejar rastro es un control que ya no verifica lo que decía verificar. La integración con TestSprite aporta el siguiente nivel (generación, ejecución en la nube y propuesta de corrección), y la arquitectura del MVP está lista para ejecutarla contra el despliegue en Vercel con Stripe en modo test."),
+  p("Las técnicas de auto-curación reducen el mantenimiento, pero deben ser auditables: el helper registra cada curación y la CI la publica, de modo que una curación no oculte un cambio funcional. En un contexto bancario esto importa tanto como la cobertura: una prueba que «se cura sola» sin dejar rastro es un control que ya no verifica lo que decía verificar. La ejecución de TestSprite contra el despliegue en Vercel confirmó el valor complementario de un agente exploratorio: generó un plan amplio pero redundante (43 casos que se depuraron a 11), encontró un defecto real que la suite propia toleraba (el reintento tras cancelar perdía el plan) y propuso un fix prompt que se aplicó y verificó con un re-run; a la vez, su diagnóstico del caso bloqueado proponía exponer la activación sin pago, una sugerencia que habría introducido una vulnerabilidad y que la revisión humana descartó. La combinación recomendada es usar el agente para descubrir y la suite determinista como compuerta del despliegue."),
 ];
 
 const anexo = bullets([
   "Hecho: proyecto generado y refinado en Cursor (Figuras 3, 4, 6, 11); despliegue en Vercel con proveedor mock en https://asesoria-planes.vercel.app (Figura 5).",
   "Stripe: crear claves de prueba y el webhook; configurar STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET y PAYMENTS_PROVIDER=stripe en Vercel y redesplegar (guía §2–3).",
   "Hecho: secretos VERCEL_* en GitHub; deploy-planes #4 completo (e2e → deploy → smoke) en verde (Figura 13); pipeline ci #7 con SonarCloud quality gate Passed.",
-  "TestSprite: configurar el MCP con la API key y ejecutar el plan desde Cursor contra localhost:3001 (mock) y contra la URL de Vercel (guía §4); guardar testsprite-mcp-test-report.md y las capturas.",
-  "Sustituir las figuras 7 y 12 por las capturas de TestSprite y Stripe Checkout, y añadir la comparación TestSprite vs. Playwright a la tabla de métricas.",
+  "Hecho: TestSprite ejecutado desde su portal contra https://asesoria-planes.vercel.app (proyecto «AsesorIA Planes (Unidad 4)», PRD cargado): exploración, plan de 43 casos depurado a 11, dos ejecuciones y fix prompt (Figuras 7 y 7b; detalle en testsprite_tests/testsprite-report-ejecucion-cloud.md).",
+  "Sustituir la figura 12 por la captura de Stripe Checkout en modo test, y añadir la comparación TestSprite vs. Playwright a la tabla de métricas.",
 ]);
 
 const doc = new Document({
@@ -185,7 +188,8 @@ const doc = new Document({
       h1("3. Plan de pruebas generado con IA e integración con TestSprite"), s3intro, planTable, spacer(40),
       p("Flujo de integración con TestSprite desde Cursor:", { bold: true, after: 30 }), tsFlow,
       ...figure("code_collage_c.png", "Figura 6. Integración con TestSprite: .cursor/mcp.json (servidor MCP), reglas del proyecto .cursor/rules y plan de pruebas testsprite_frontend_test_plan.json generado a partir del PRD.", 400),
-      ...figure("ph_testsprite.png", "Figura 7. Ejecución del plan en TestSprite (captura pendiente; ver Anexo).", 480),
+      ...figure("testsprite_collage.png", "Figura 7. TestSprite sobre el despliegue: exploración autónoma (3 páginas, 53 s) y resultados de la ejecución en la nube (11 pruebas: 9 pasan, 1 falla, 1 bloqueada; pass rate 82 %).", FIGW),
+      ...figure("testsprite_05_resumen_fallo.png", "Figura 7b. Diagnóstico generado por TestSprite para el fallo (causa raíz propuesta) con las acciones Re-run y Copy Fix Prompt (self-healing asistido por IA).", 520),
       h1("4. Revisión y validación de cada caso"),
       p("Cada caso generado se revisó contra el PRD antes de ejecutarlo y, tras la primera ejecución, se clasificó la causa de cada fallo como defecto del producto, expectativa incorrecta de la prueba o fragilidad del localizador. La tabla resume el ciclo; los logs completos están en testsprite_tests/ejecucion_1_fallos.log y ejecucion_2_final.log.", { after: 40 }),
       revisionTable,
