@@ -50,6 +50,9 @@ jobs:
     timeout-minutes: 15
     environment: { name: production, url: "${{ steps.deploy.outputs.url }}" }
     outputs: { url: "${{ steps.deploy.outputs.url }}" }
+    # El proyecto de Vercel tiene Root Directory = asesoria-planes, por lo que la CLI debe ejecutarse
+    # desde la raíz del repositorio (no desde el working-directory por defecto) para no duplicar la ruta.
+    defaults: { run: { working-directory: . } }
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
