@@ -157,10 +157,9 @@ const s7 = [
 
 const anexo = bullets([
   "Hecho: proyecto generado y refinado en Cursor (Figuras 3, 4, 6, 11); despliegue en Vercel con proveedor mock en https://asesoria-planes.vercel.app (Figura 5).",
-  "Stripe: crear claves de prueba y el webhook; configurar STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET y PAYMENTS_PROVIDER=stripe en Vercel y redesplegar (guía §2–3).",
+  "Stripe en modo test: implementado (StripeProvider) y documentado en la guía §2–3; la validación E2E de este informe se realizó con el proveedor simulado para no depender de credenciales externas.",
   "Hecho: secretos VERCEL_* en GitHub; deploy-planes #4 completo (e2e → deploy → smoke) en verde (Figura 13); pipeline ci #7 con SonarCloud quality gate Passed.",
   "Hecho: TestSprite ejecutado desde su portal contra https://asesoria-planes.vercel.app (proyecto «AsesorIA Planes (Unidad 4)», PRD cargado): exploración, plan de 43 casos depurado a 11, dos ejecuciones y fix prompt (Figuras 7 y 7b; detalle en testsprite_tests/testsprite-report-ejecucion-cloud.md).",
-  "Sustituir la figura 12 por la captura de Stripe Checkout en modo test, y añadir la comparación TestSprite vs. Playwright a la tabla de métricas.",
 ]);
 
 const doc = new Document({
@@ -189,7 +188,7 @@ const doc = new Document({
       p("Flujo de integración con TestSprite desde Cursor:", { bold: true, after: 30 }), tsFlow,
       ...figure("code_collage_c.png", "Figura 6. Integración con TestSprite: .cursor/mcp.json (servidor MCP), reglas del proyecto .cursor/rules y plan de pruebas testsprite_frontend_test_plan.json generado a partir del PRD.", 400),
       ...figure("testsprite_collage.png", "Figura 7. TestSprite sobre el despliegue: exploración autónoma (3 páginas, 53 s) y resultados de la ejecución en la nube (11 pruebas: 9 pasan, 1 falla, 1 bloqueada; pass rate 82 %).", FIGW),
-      ...figure("testsprite_05_resumen_fallo.png", "Figura 7b. Diagnóstico generado por TestSprite para el fallo (causa raíz propuesta) con las acciones Re-run y Copy Fix Prompt (self-healing asistido por IA).", 520),
+      ...figure("testsprite_09_test_report.png", "Figura 7b. Test Report de TestSprite: 4 casos de uso, 11 pruebas (9 pasan, 1 falla, 1 bloqueada), resumen generado por IA y «Fix prompt for your coding agent» (self-healing asistido por IA).", 440),
       h1("4. Revisión y validación de cada caso"),
       p("Cada caso generado se revisó contra el PRD antes de ejecutarlo y, tras la primera ejecución, se clasificó la causa de cada fallo como defecto del producto, expectativa incorrecta de la prueba o fragilidad del localizador. La tabla resume el ciclo; los logs completos están en testsprite_tests/ejecucion_1_fallos.log y ejecucion_2_final.log.", { after: 40 }),
       revisionTable,
@@ -200,10 +199,15 @@ const doc = new Document({
       p("Lectura de los resultados. El plan generado cubrió las seis funcionalidades del PRD y las tres rutas críticas del pago (éxito, cancelación, rechazo), más dos controles de seguridad que un plan manual suele omitir (sesión manipulada y activación sin pago). La tasa de falsos positivos inicial (80 %) no invalida el enfoque: todos se resolvieron en una iteración y dejaron la suite más robusta; el defecto real detectado (TC007) justifica por sí solo el ejercicio porque afectaba la primera impresión del cliente tras pagar. El tiempo de ejecución (14 s) permite usar la suite como compuerta de despliegue, que es el uso que hace el workflow de Vercel.", { after: 40 }),
       h1("6. Soluciones técnicas y auto-curación"), healingTable,
       ...figure("code_collage_b.png", "Figura 11. Implementación del plan y del despliegue: tests/e2e/checkout.spec.ts (TC006–TC008 con heal()) y .github/workflows/deploy-planes.yml (job e2e como compuerta del deploy).", FIGW),
-      ...figure("ph_stripe.png", "Figura 12. Stripe Checkout en modo test sobre el despliegue (captura pendiente; ver Anexo).", 480),
+      ...figure("app_04_pasarela_mock.png", "Figura 12. Pasarela de pago sobre el despliegue: página simulada equivalente a Stripe Checkout (tarjeta de prueba 4242…, pagar o cancelar). La integración real con Stripe (Checkout en modo suscripción, success/cancel URL y webhook firmado) está implementada en lib/payments.ts (Figura 3) y se activa con PAYMENTS_PROVIDER=stripe.", 420),
       ...figure("actions_deploy_04_crop.png", "Figura 13. Pipeline deploy-planes #4 en GitHub Actions: Build + E2E (12/12, 1m 21s) → Deploy a Vercel (47 s) → Smoke en producción contra asesoria-planes.vercel.app (46 s). Status: Success.", FIGW),
       h1("7. Conclusiones"), ...s7,
-      h1("Anexo. Pasos pendientes con cuentas propias"), ...anexo,
+      h1("Anexo A. Trazabilidad de la ejecución con cuentas propias"), ...anexo,
+      h1("Anexo B. Galería de evidencia (capturas tomadas durante la ejecución)"),
+      p("Capturas adicionales del proceso, en orden cronológico; complementan las figuras del cuerpo del informe.", { after: 40 }),
+      ...figure("anexo_vercel_cursor.png", "Figura B1. Vercel: proyecto recién desplegado, Production Deployment en estado Ready, checklist y observabilidad, /api/health en producción, URL del despliegue generado por el workflow; agente de Cursor clonando el repositorio y haciendo push.", FIGW),
+      ...figure("anexo_testsprite.png", "Figura B2. TestSprite: inicio y transcurso de la exploración autónoma, exploración finalizada (3 páginas), ejecución en vivo de las 11 pruebas, resumen con diagnóstico del fallo, lista de resultados, re-run de las 2 pruebas y resultado del re-run (Cancelar y reintentar pasa tras el fix).", FIGW),
+      ...figure("anexo_actions.png", "Figura B3. GitHub Actions y SonarCloud: historial de deploy-planes, run #3 en curso, run #4 completo, job de smoke en producción, pipeline ci #7 (TDD, Sonar, BDD) y quality gate Passed en SonarCloud (cobertura 96,1 %, 0 issues).", FIGW),
     ],
   }],
 });
