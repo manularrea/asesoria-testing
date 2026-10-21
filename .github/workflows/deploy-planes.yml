@@ -77,7 +77,11 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm, cache-dependency-path: asesoria-planes/package-lock.json }
       - run: npm ci && npx playwright install --with-deps chromium
+      # La URL única del despliegue (asesoria-planes-xxxx.vercel.app) está protegida por Vercel Authentication
+      # (Standard Protection); el smoke se ejecuta contra el dominio de producción, que es público.
       - name: Health + catálogo + API contra la URL pública
+        env: { PROD_URL: "${{ vars.PRODUCTION_URL || 'https://asesoria-planes.vercel.app' }}" }
         run: |
-          curl -fsS "${{ needs.deploy.outputs.url }}/api/health"
-          BASE_URL="${{ needs.deploy.outputs.url }}" npx playwright test tests/e2e/api.spec.ts tests/e2e/catalogo.spec.ts
+          curl -fsS "$PROD_URL/api/health" | tee -a "$GITHUB_STEP_SUMMARY"; echo
+          BASE_URL="$PROD_URL" npx playwright test tests/e2e/api.spec.ts tests/e2e/catalogo.spec.ts
+          echo "Smoke OK contra $PROD_URL (despliegue ${{ needs.deploy.outputs.url }})" >> "$GITHUB_STEP_SUMMARY"
