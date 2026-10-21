@@ -96,15 +96,14 @@ jobs:
         with: { name: jacoco-guardrail-service, path: guardrail-service/target }
       - uses: actions/download-artifact@v4
         with: { name: coverage-sut, path: sut }
-      - name: Análisis SonarCloud (usa sonar-project.properties)
-        uses: SonarSource/sonarqube-scan-action@v5
+      - name: Análisis SonarCloud + quality gate (el scanner espera el gate y falla el job si no se cumple)
+        uses: SonarSource/sonarqube-scan-action@v8
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      - name: Esperar el resultado del quality gate (falla el pipeline si no se cumple)
-        uses: SonarSource/sonarqube-quality-gate-action@v1
-        timeout-minutes: 5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.qualitygate.wait=true
+            -Dsonar.qualitygate.timeout=300
 
   # ------------------------------------------------------------ BDD / E2E
   bdd-e2e:
@@ -129,7 +128,7 @@ jobs:
           curl -fs localhost:8000/api/health | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Instalar Chromium para Playwright
         working-directory: tests-e2e
-        run: mvn -B --no-transfer-progress exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install --with-deps chromium"
+        run: mvn -B --no-transfer-progress exec:java -e -Dexec.classpathScope=test -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install --with-deps chromium"
       - name: Escenarios BDD (Cucumber-JVM) y suite de regresión (JUnit 5 + Playwright)
         working-directory: tests-e2e
         run: mvn -B --no-transfer-progress test -Dsut.baseUrl=http://localhost:8000

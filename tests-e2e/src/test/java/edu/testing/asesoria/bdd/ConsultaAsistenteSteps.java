@@ -116,8 +116,12 @@ public class ConsultaAsistenteSteps {
     assertThat(chat.statusOf(ultimaRespuesta)).hasText("estado: " + estado);
   }
 
-  @Y("la confianza mostrada es mayor o igual a {double}")
-  public void laConfianzaMostradaEsMayorOIgualA(double umbral) {
+  // Expresión regular en lugar de {double}: con "# language: es" Cucumber-JVM interpreta
+  // {double} con la configuración regional española (coma decimal) y lee "0.40" como 40.0.
+  // Se aceptan ambos separadores para que el mismo .feature sirva al glue Java y al de JS.
+  @Y("^la confianza mostrada es mayor o igual a (\\d+[.,]\\d+)$")
+  public void laConfianzaMostradaEsMayorOIgualA(String umbralTexto) {
+    double umbral = Double.parseDouble(umbralTexto.replace(',', '.'));
     String texto = chat.confidenceOf(ultimaRespuesta).textContent();   // "confianza: 0.85"
     double confianza = Double.parseDouble(texto.replace("confianza:", "").trim());
     assertTrue(confianza >= umbral, "confianza " + confianza + " menor que " + umbral);
@@ -145,6 +149,9 @@ public class ConsultaAsistenteSteps {
   }
 
   private static String nombreArchivo(Scenario scenario) {
-    return scenario.getName().replaceAll("[^\\p{L}\\p{N}]+", "_").replaceAll("^_|_$", "");
+    // Nombre ASCII: sin tildes para no depender de la codificación del sistema de archivos del agente CI.
+    String ascii = java.text.Normalizer.normalize(scenario.getName(), java.text.Normalizer.Form.NFD)
+        .replaceAll("\\p{M}+", "");
+    return ascii.replaceAll("[^A-Za-z0-9]+", "_").replaceAll("^_|_$", "");
   }
 }
