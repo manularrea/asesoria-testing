@@ -35,6 +35,9 @@ public class ChatPage {
   /** Escribe la consulta, la envía y espera la respuesta del asistente. Devuelve el mensaje del bot. */
   public Locator send(String message) {
     int before = botMessages.count();
+    // Espera a que chat.js haya registrado sus manejadores; si no, el evento input de fill() se pierde
+    // y el botón Enviar queda deshabilitado (fallo intermitente observado en CI).
+    page.locator("[data-testid='chat-form'][data-ready='true']").waitFor();
     input.fill(message);
     send.click();
     Locator reply = botMessages.nth(before);

@@ -39,6 +39,8 @@
   }
 
   input.addEventListener('input', () => { send.disabled = input.value.trim().length === 0; });
+  // Señal de testabilidad: los manejadores ya están registrados (evita carreras en pruebas E2E).
+  form.setAttribute('data-ready', 'true');
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
